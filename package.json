@@ -1,0 +1,23 @@
+{
+  "name": "capstone-project",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd ./client && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SabMueller/capstone-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SabMueller/capstone-project/issues"
+  },
+  "homepage": "https://github.com/SabMueller/capstone-project#readme",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
