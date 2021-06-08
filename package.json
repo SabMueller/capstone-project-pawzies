@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "cd ./client && npm start",
+    "cy:open": "cd ./client && npm run cy:open",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd ./server && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,5 +22,6 @@
   "homepage": "https://github.com/SabMueller/capstone-project#readme",
   "dependencies": {
     "concurrently": "^6.2.0"
-  }
+  },
+  "devDependencies": {}
 }

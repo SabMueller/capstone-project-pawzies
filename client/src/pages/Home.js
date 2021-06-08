@@ -1,0 +1,116 @@
+import { Link } from 'react-router-dom';
+import styled from 'styled-components/macro';
+import Logo from '../assets/images/logo.svg';
+import ArrowIcon from '../assets/icons/ArrowIcon.svg';
+
+export default function Home() {
+  return (
+    <LandingPageWrapper>
+      <LogoWrapper>
+        <LogoImage src={Logo} alt='Logo of Pawzy' />
+      </LogoWrapper>
+      <TextWrapper>
+        <Paragraph>
+          Ready to find a <span> New Friend ?</span>
+        </Paragraph>
+        <StyledLink to='/search'>
+          <PrimaryButton>
+            GO!
+            <img
+              src={ArrowIcon}
+              alt='An Icon displaying an arrow pointing to the right'
+              width='20'
+            />
+          </PrimaryButton>
+        </StyledLink>
+        <Paragraph isSecondary>For Organizations:</Paragraph>
+        <StyledLink to='/add-animal'>
+          <Button>
+            ADD PET
+            <img
+              src={ArrowIcon}
+              alt='An Icon displaying an arrow pointing to the right'
+              width='15'
+            />
+          </Button>
+        </StyledLink>
+      </TextWrapper>
+    </LandingPageWrapper>
+  );
+}
+
+const LandingPageWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: rgb(49, 211, 211);
+  background: linear-gradient(
+    180deg,
+    rgba(49, 211, 211, 1) 0%,
+    rgba(31, 153, 182, 1) 32%,
+    rgba(8, 55, 118, 1) 100%
+  );
+  height: 100vh;
+  margin: 0;
+`;
+
+const LogoWrapper = styled.div`
+  display: grid;
+  place-items: center;
+  background: gainsboro;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  margin-top: 4rem;
+  padding: 1.7rem;
+  width: 12rem;
+`;
+
+const LogoImage = styled.img`
+  width: 10rem;
+`;
+
+const TextWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  color: white;
+
+  span {
+    display: block;
+    font-weight: bold;
+  }
+`;
+
+const Paragraph = styled.p`
+  font-size: ${(props) => (props.isSecondary ? '1.2rem' : '1.6rem')};
+`;
+
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 100vw;
+  cursor: pointer;
+  font-family: var(--ff-cursive);
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  width: 9rem;
+
+  img {
+    width: 1.2rem;
+  }
+`;
+
+const PrimaryButton = styled(Button)`
+  justify-content: space-evenly;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  padding: 1rem;
+  width: 10rem;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;

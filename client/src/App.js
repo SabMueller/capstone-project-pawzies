@@ -1,5 +1,7 @@
 //import { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
+//import styled from 'styled-components/macro';
+import Home from './pages/Home';
 import Navigation from './components/Navigation';
 
 function App() {
@@ -9,28 +11,44 @@ function App() {
       .then((response) => setServerMessage(response));
   }); */
 
-  function Home() {
-    return <></>;
-  }
-
   function AnimalSearch() {
-    return <></>;
+    return (
+      <>
+        <h1>Search Animal</h1>
+      </>
+    );
   }
 
   function AnimalForm() {
-    return <></>;
+    return (
+      <>
+        <h1>Add Animal</h1>
+      </>
+    );
   }
 
   function Main() {
-    return <></>;
+    return (
+      <>
+        <h1>Main</h1>
+      </>
+    );
   }
 
   function Favorites() {
-    return <></>;
+    return (
+      <>
+        <h1>Favorites</h1>
+      </>
+    );
   }
 
   function Contact() {
-    return <></>;
+    return (
+      <>
+        <h1>Get In Touch</h1>
+      </>
+    );
   }
 
   return (
