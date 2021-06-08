@@ -4,20 +4,24 @@ export default createGlobalStyle`
 
 
 :root {
-/*   --primary: hsl(311, 57%, 37%); 	
-  --primary-light: #eee4e1;
-  --primary-lightest:  ;
-  --primary-dark: hsl(311, 57%, 28%) ;
-  --primary-darkest:  hsl(311, 57%, 18%);
-  --secondary: hsl(241, 39%, 26%);
-  --secondary-light: #E7D8C9;
-  --secondary-lightest:  ;
-  --secondary-dark:  ;
-  --secondary-darkest:  ;
-  --white: #ecf8f8;
-  --black: #211103; */
+  --primary: hsl(187, 66%, 44%);
+  --primary-light: 	hsl(187, 66%, 60%);
+  --primary-lightest: 	hsl(187, 66%, 76%) ;
+  --primary-dark: 	hsl(187, 66%, 24%);
+  --primary-darkest: 	hsl(187, 66%, 8%) ;
+  --secondary: hsl(329, 54%, 47%);
+  --secondary-light:	hsl(329, 54%, 68%) ;
+  --secondary-lightest: 	hsl(329, 55%, 80%) ;
+  --secondary-dark:  hsl(329, 54%, 32%);
+  --secondary-darkest:  hsl(329, 55%, 20%);
+  --white: hsl(0, 0%, 99%);
+  --black: 	hsl(187, 6%, 15%); 
+  --blue-dark: 	hsl(225, 41%, 25%);
+  --gray-dark: 	hsl(224, 16%, 28%);
+  --gray: hsl(224, 16%, 87%);
+  --gray-light:hsl(225, 24%, 93%);
 
-  
+
   --ff-sans: 'Dosis', sans-serif;
   --ff-sans-alternative: 'Roboto', sans-serif;
   --ff-cursive: 'Righteous', cursive;
@@ -43,7 +47,7 @@ body, h1, h2, h3, p {
 body {
   line-height: 1.5;
   font-family: var(--ff-sans);
-  font-size: 1.25rem; /* var(--fs-400) */
+  font-size: 1.25rem; 
 }
 
 ul[class],

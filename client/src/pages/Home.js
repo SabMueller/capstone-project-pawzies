@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <LandingPageWrapper>
       <LogoWrapper>
-        <LogoImage src={Logo} alt='Logo of Pawzy' />
+        <LogoImage src={Logo} alt='Logo of Pawzies' />
       </LogoWrapper>
       <TextWrapper>
         <Paragraph>
@@ -19,7 +19,6 @@ export default function Home() {
             <img
               src={ArrowIcon}
               alt='An Icon displaying an arrow pointing to the right'
-              width='20'
             />
           </PrimaryButton>
         </StyledLink>
@@ -30,7 +29,6 @@ export default function Home() {
             <img
               src={ArrowIcon}
               alt='An Icon displaying an arrow pointing to the right'
-              width='15'
             />
           </Button>
         </StyledLink>
@@ -58,7 +56,7 @@ const LandingPageWrapper = styled.section`
 const LogoWrapper = styled.div`
   display: grid;
   place-items: center;
-  background: gainsboro;
+  background: var(--gray);
   border-radius: 50%;
   margin-bottom: 2rem;
   margin-top: 4rem;
@@ -75,7 +73,7 @@ const TextWrapper = styled.section`
   align-items: center;
   flex-flow: column nowrap;
   gap: 1rem;
-  color: white;
+  color: var(--white);
 
   span {
     display: block;
@@ -91,6 +89,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  background-color: var(--gray);
   border-radius: 100vw;
   cursor: pointer;
   font-family: var(--ff-cursive);
@@ -99,7 +98,7 @@ const Button = styled.button`
   width: 9rem;
 
   img {
-    width: 1.2rem;
+    width: 1rem;
   }
 `;
 
@@ -109,6 +108,10 @@ const PrimaryButton = styled(Button)`
   margin-bottom: 2.5rem;
   padding: 1rem;
   width: 10rem;
+
+  img {
+    width: 1.3rem;
+  }
 `;
 
 const StyledLink = styled(Link)`
