@@ -11,7 +11,7 @@ export default function Home() {
       </LogoWrapper>
       <TextWrapper>
         <Paragraph>
-          Ready to find a <span> New Friend ?</span>
+          Ready to adopt a <span> Friend For Life ?</span>
         </Paragraph>
         <StyledLink to='/search'>
           <PrimaryButton>
@@ -82,6 +82,7 @@ const TextWrapper = styled.section`
 `;
 
 const Paragraph = styled.p`
+  text-align: center;
   font-size: ${(props) => (props.isSecondary ? '1.2rem' : '1.6rem')};
 `;
 

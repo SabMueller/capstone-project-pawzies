@@ -1,4 +1,4 @@
-# Welcome to PAWZY - An App where you can Adopt A Friend for Life
+# Welcome to PAWZIES - An App where you can Adopt A Friend for Life
 
 This project is a capstone project by Sabrina Mueller.
 
