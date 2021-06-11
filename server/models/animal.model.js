@@ -8,7 +8,7 @@ const animalSchema = new mongoose.Schema({
   breed: String,
   characteristics: Array,
   description: String,
-  pciture: String,
+  picture: String,
 });
 
 const Animal = mongoose.model('Animal', animalSchema);

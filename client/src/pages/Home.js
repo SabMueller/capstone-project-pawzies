@@ -23,7 +23,7 @@ export default function Home() {
           </PrimaryButton>
         </StyledLink>
         <Paragraph isSecondary>For Organizations:</Paragraph>
-        <StyledLink to='/add-animal'>
+        <StyledLink to='/add'>
           <Button>
             ADD PET
             <img
