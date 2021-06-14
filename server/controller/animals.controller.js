@@ -55,18 +55,3 @@ function deleteAnimal(req, res) {
 }
 
 export { getAnimals, getAnimalId, postAnimal, updateAnimal, deleteAnimal };
-
-//postman template
-
-/*
-{
-    "name": "",
-    "type": "",
-    "age": ,
-    "gender": "",
-    "breed": "",
-    "characteristics": "",
-    "description": "",
-    "picture": ""
-}
-*/

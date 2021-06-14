@@ -10,31 +10,30 @@ function App() {
   const [animals, setAnimals] = useState([]);
 
   async function addOrganizationsAndAnimals(organization, animal) {
-    fetch('http://localhost:4000/organizations', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(organization),
-    });
     try {
-      await ((result) => result.json());
-      await ((organization) =>
-        setOrganizations([...organizations, organization]));
+      const result = await fetch('http://localhost:4000/organizations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(organization),
+      });
+      const organizationSaved = await result.json();
+      setOrganizations([...organizations, organizationSaved]);
     } catch (error) {
       console.error(error);
     }
 
-    fetch('http://localhost:4000/animals', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(animal),
-    });
     try {
-      await ((result) => result.json());
-      await ((animal) => setAnimals([...animals, animal]));
+      const result = await fetch('http://localhost:4000/animals', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(animal),
+      });
+      const animalSaved = await result.json();
+      setAnimals([...animals, animalSaved]);
     } catch (error) {
       console.error(error);
     }

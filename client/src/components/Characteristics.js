@@ -23,19 +23,25 @@ export default function Characteristics({
   }
 
   return (
-    <>
-      <Label htmlFor='characteristics'>Characteristics</Label>
+    <TraitWrapper>
+      <label htmlFor='characteristics'>Characteristics</label>
+      <P isDescription>
+        Put in some character traits of the animal and press{' '}
+        <span style={{ fontWeight: 'bold' }}>Enter</span> to add them.
+      </P>
       <Traits>
         <TraitCloud>
           {traits.map((trait, index) => (
-            <span key={index + trait}>
+            <span
+              style={{ color: 'var(--white)', fontSize: '1.2rem' }}
+              key={index + trait}>
               {trait}
               <Button type='button' onClick={() => onRemoveTrait(trait)}>
                 X
               </Button>
             </span>
           ))}
-          <input
+          <Input
             type='text'
             name='characteristics'
             placeholder='Enter some characteristic features'
@@ -45,53 +51,70 @@ export default function Characteristics({
           />
         </TraitCloud>
       </Traits>
-    </>
+    </TraitWrapper>
   );
 }
 
-const Label = styled.label`
-  display: block;
-  font-weight: bold;
-  font-family: sans-serif;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+const TraitWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+
+  span {
+    color: var(--white);
+    font-weight: bold;
+  }
+`;
+
+const P = styled.p`
+  color: ${(props) =>
+    props.isDescription ? 'var(--black)' : 'var(--primary-dark)'};
+  margin: 0.5rem 0;
+  padding: 0 1.7rem;
+  text-align: center;
+  font-size: ${(props) => (props.isDescription ? '1.2rem' : '1.5rem')};
+  font-weight: ${(props) => (props.isDescription ? 'normal' : 'bold')};
 `;
 
 const Traits = styled.section`
   display: grid;
   font-family: sans-serif;
   gap: 0.2rem;
+`;
 
-  input {
-    padding: 0.5rem;
-    border: none;
-    background: none;
-    width: 10vw;
-    color: var(--secondary);
+const Input = styled.input`
+  align-self: center;
+  background-color: var(--blue-dark);
+  border: 1px inset var(--black);
+  border-radius: 0.5rem;
+  color: var(--white);
+  font-size: 1rem;
+  height: 2.5rem;
+  text-align: center;
+  width: 70vw;
+
+  &:focus {
+    outline-color: var(--white);
   }
 
-  input:focus {
-    outline: none;
-  }
-
-  input::placeholder {
-    color: var(--black);
+  &::placeholder {
+    color: darkgray;
   }
 `;
 
 const TraitCloud = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 
   span {
-    background: #9e38a2;
-    color: ivory;
+    background: var(--blue-dark);
     padding: 0.3rem;
     border-radius: 0.3rem;
     margin: 0.2rem;
     height: 2rem;
     display: flex;
-    justify-content: center;
+    justify-self: flex-start;
     align-items: center;
   }
 `;
@@ -99,5 +122,7 @@ const TraitCloud = styled.div`
 const Button = styled.button`
   background: none;
   border: none;
-  color: black;
+  color: var(--secondary);
+  font-size: 1.2rem;
+  margin: auto;
 `;

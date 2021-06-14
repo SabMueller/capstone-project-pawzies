@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import Characteristics from '../components/Characteristics';
+import Logo from '../assets/images/logo.svg';
 
 export default function AddForm({ onAddOrganizationsAndAnimals }) {
   const initialOrganization = {
@@ -27,11 +28,14 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
   const [organization, setOrganization] = useState(initialOrganization);
   const [animal, setAnimal] = useState(initialAnimal);
 
-  const [image, setImage] = useState('');
+  const hiddenFileInput = useRef(null);
+  const handleClick = () => {
+    hiddenFileInput.current.click();
+  };
 
-  console.log('FLO?', animal);
+  console.log('animal', animal);
 
-  const uploadImage = () => {
+  const uploadImage = (image) => {
     const data = new FormData();
     data.append('file', image);
     data.append('upload_preset', 'rjqeqskh');
@@ -45,7 +49,6 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
         setAnimal({ ...animal, picture: data.url });
       })
       .catch((err) => console.log(err));
-    console.log('DATA', data);
   };
 
   function handleFormSubmit(event) {
@@ -53,16 +56,11 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
     onAddOrganizationsAndAnimals(organization, animal);
     setOrganization(initialOrganization);
     setAnimal(initialAnimal);
-    uploadImage();
   }
 
   function updateOrganization(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
-
-    if (event.target.type === 'checkbox') {
-      fieldValue = event.target.checked;
-    }
 
     setOrganization({ ...organization, [fieldName]: fieldValue });
   }
@@ -70,10 +68,6 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
   function updateAnimal(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
-
-    if (event.target.type === 'checkbox') {
-      fieldValue = event.target.checked;
-    }
 
     setAnimal({ ...animal, [fieldName]: fieldValue });
   }
@@ -84,7 +78,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
       alert(
         'Unfortunately, this Image is too big. Please choose another one that is less than 2MB'
       );
-    } else setImage(event.target.files[0]);
+    } else uploadImage(event.target.files[0]);
   }
 
   function removeTrait(removeTrait) {
@@ -103,11 +97,16 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
 
   return (
     <FormWrapper>
-      <h1>Add Organization and Animal</h1>
-      <p>Please specify your organization below</p>
+      <LogoWrapper>
+        <LogoImage src={Logo} alt='Logo of Pawzies' />
+      </LogoWrapper>
+      <h1>
+        Add Your Organization and Animal to <span>Pawzies</span>
+      </h1>
       <Form onSubmit={handleFormSubmit}>
+        <P>Please specify your organization below</P>
         <label htmlFor='name'>Name</label>
-        <input
+        <Input
           type='text'
           name='name'
           placeholder='Name of your Organization'
@@ -115,7 +114,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           onChange={updateOrganization}
         />
         <label htmlFor='email'>E-Mail</label>
-        <input
+        <Input
           type='text'
           name='email'
           placeholder='E-Mail of your Organization'
@@ -123,7 +122,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           onChange={updateOrganization}
         />
         <label htmlFor='phone'>Phone</label>
-        <input
+        <Input
           type='text'
           name='phone'
           placeholder='Phone Number of your Organization'
@@ -133,7 +132,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
         <AddressWrapper>
           <h4>Address</h4>
           <label htmlFor='street'>Street</label>
-          <input
+          <Input
             type='text'
             name='street'
             placeholder='Street'
@@ -141,7 +140,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
             onChange={updateOrganization}
           />
           <label htmlFor='zip'>ZIP Code</label>
-          <input
+          <Input
             type='text'
             name='zip'
             placeholder='ZIP Code'
@@ -149,20 +148,20 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
             onChange={updateOrganization}
           />
           <label htmlFor='city'> City</label>
-          <input
+          <Input
             type='text'
-            name='City'
+            name='city'
             placeholder='City / Location'
             value={organization.city}
             onChange={updateOrganization}
           />
         </AddressWrapper>
-        <p>
+        <P>
           Please provide the following information about the Animal you wish to
           add:
-        </p>
+        </P>
         <label htmlFor='name'>Name</label>
-        <input
+        <Input
           type='text'
           name='name'
           placeholder='Name of the Animal'
@@ -170,7 +169,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           onChange={updateAnimal}
         />
         <label htmlFor='type'>Type</label>
-        <select
+        <Select
           name='type'
           id='type'
           value={animal.type}
@@ -179,35 +178,58 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           <option value='cat'>Cat</option>
           <option value='dog'>Dog</option>
           <option value='small_animals'>Small Animals</option>
-        </select>
+        </Select>
         <label htmlFor='age'>Age</label>
-        <input
+        <AgeInput
           type='number'
           name='age'
-          min='0'
-          max='30'
+          placeholder='Age'
           value={animal.age}
           onChange={updateAnimal}
         />
+
         <label htmlFor='gender'>Gender</label>
-        <input
-          type='radio'
-          name='gender'
-          value='female'
-          checked={animal.gender === 'female'}
-          onChange={updateAnimal}
+        <RadioWrapper>
+          <label className='radio'>
+            <span className='radio__input'>
+              <input
+                type='radio'
+                name='gender'
+                value='female'
+                checked={animal.gender === 'female'}
+                onChange={updateAnimal}
+              />
+              <span className='radio__control'></span>
+            </span>
+            <span className='radio__label'>Female</span>
+          </label>
+          <label className='radio'>
+            <span className='radio__input'>
+              <input
+                type='radio'
+                name='gender'
+                value='male'
+                checked={animal.gender === 'male'}
+                onChange={updateAnimal}
+              />
+              <span className='radio__control'></span>
+            </span>
+            <span className='radio__label'>Male</span>
+          </label>
+        </RadioWrapper>
+        <label htmlFor='picture'>Profile Picture</label>
+        <P isDescription>Upload a picture of the animal</P>
+        <Button onClick={handleClick}>Upload a file</Button>
+        <Input
+          type='file'
+          name='picture'
+          accept='.jpg,.jpeg,.png,.svg'
+          onChange={updateImage}
+          style={{ display: 'none' }}
+          ref={hiddenFileInput}
         />
-        Female
-        <input
-          type='radio'
-          name='gender'
-          value='male'
-          checked={animal.gender === 'male'}
-          onChange={updateAnimal}
-        />
-        Male
         <label htmlFor='breed'>Breed</label>
-        <input
+        <Input
           type='text'
           name='breed'
           placeholder='Breed of the Animal'
@@ -229,39 +251,223 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           cols='30'
           rows='10'
         />
-        <input
-          type='file'
-          accept='.jpg,.jpeg,.png'
-          /*           onChange={(e) => setImage(e.target.files[0])} */
-          onChange={updateImage}
-        />
-        <Link to='/'>
-          <button type='cancel'>Go Back</button>
+        <Link style={{ textDecoration: 'none' }} to='/'>
+          <Button type='button'>Go Back</Button>
         </Link>
-        <button onSubmit={handleFormSubmit}>SUBMIT</button>
+        <Button>SUBMIT</Button>
       </Form>
     </FormWrapper>
   );
 }
 
-const FormWrapper = styled.section`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+const LogoWrapper = styled.div`
+  display: grid;
+  place-items: center;
+  background: var(--gray);
+  filter: drop-shadow(0 0 0.8rem var(--black));
+  margin-bottom: 1.3rem;
+  padding: 1.3rem;
+  width: 10rem;
+  border-bottom-right-radius: 20%;
+  border-bottom-left-radius: 20%;
 `;
 
-const AddressWrapper = styled.section`
+const LogoImage = styled.img`
+  width: 10rem;
+`;
+
+const FormWrapper = styled.section`
   display: flex;
-  flex-flow: column nowrap;
   align-items: center;
+  flex-flow: column nowrap;
+  color: var(--secondary);
+  font-weight: bold;
+  background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+  margin: 0;
+
+  h1 {
+    padding: 0 1.5rem;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  span {
+    color: var(--black);
+    font-weight: normal;
+  }
 `;
 
 const Form = styled.form`
   display: flex;
-  flex-flow: column nowrap;
   align-items: center;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+
+  background-color: rgba(217, 219, 227, 30%);
+  border-radius: 0.8rem;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 0.5rem;
+
+  span {
+    color: var(--secondary);
+  }
+`;
+
+const P = styled.p`
+  color: ${(props) =>
+    props.isDescription ? 'var(--black)' : 'var(--primary-dark)'};
+  margin: 0.5rem 0;
+  padding: 0 1.7rem;
+  text-align: center;
+  font-size: ${(props) => (props.isDescription ? '1.2rem' : '1.5rem')};
+  font-weight: ${(props) => (props.isDescription ? 'normal' : 'bold')};
+`;
+
+const Input = styled.input`
+  align-self: center;
+  background-color: var(--blue-dark);
+  border: 1px inset var(--black);
+  border-radius: 0.5rem;
+  color: var(--white);
+  font-size: 1rem;
+  height: 2.5rem;
+  text-align: center;
+  width: ${(props) => (props.isRadio ? '1.5rem' : '70vw')};
+
+  &:focus {
+    outline-color: var(--white);
+  }
+
+  &::placeholder {
+    color: darkgray;
+  }
+`;
+
+const Select = styled.select`
+  background-color: var(--blue-dark);
+  border: 1px inset var(--black);
+  border-radius: 0.5rem;
+  color: var(--white);
+  font-size: 1rem;
+  height: 2.5rem;
+  text-align-last: center;
+  width: 70vw;
+`;
+
+const AgeInput = styled(Input)`
+  width: 30vw;
+  margin-bottom: 0.5rem;
+`;
+
+const AddressWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+  margin-bottom: 2rem;
+
+  h4 {
+    margin: 0.3rem 0;
+  }
+`;
+
+const RadioWrapper = styled.section`
+  color: white;
+  .radio {
+    color: var(--primary);
+    font-size: 1.5rem;
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-gap: 0.5em;
+    align-items: baseline;
+    margin-bottom: 1rem;
+
+    &:focus-within {
+      .radio__label {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+    }
+
+    .radio__input {
+      display: flex;
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .radio__control {
+        display: grid;
+        place-items: center;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        border: 0.1em solid currentColor;
+        transform: translateY(-0.05em);
+        color: var(--blue-dark);
+      }
+
+      input + .radio__control::before {
+        content: '';
+        width: 0.5em;
+        height: 0.5em;
+        box-shadow: inset 0.5em 0.5em currentColor;
+        border-radius: 50%;
+        transition: 180ms transform ease-in-out;
+        transform: scale(0);
+      }
+
+      input:checked + .radio__control::before {
+        transform: scale(1);
+      }
+
+      .radio__label {
+        line-height: 1;
+        transition: 180ms all ease-in-out;
+        opacity: 0.8;
+      }
+    }
+  }
+`;
+
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--gray);
+  border-radius: 100vw;
+  cursor: pointer;
+  font-family: var(--ff-cursive);
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  width: 9rem;
+
+  img {
+    width: 1rem;
+  }
 `;
 
 const Textarea = styled.textarea`
+  background-color: var(--blue-dark);
   resize: none;
+
+  align-self: center;
+  border: 1px inset var(--black);
+  border-radius: 0.5rem;
+  color: var(--white);
+  font-size: 1rem;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 1rem;
+  width: ${(props) => (props.isRadio ? '1.5rem' : '70vw')};
+
+  &:focus {
+    outline-color: var(--white);
+  }
+
+  &::placeholder {
+    color: darkgray;
+  }
 `;
