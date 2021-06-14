@@ -160,6 +160,17 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           Please provide the following information about the Animal you wish to
           add:
         </P>
+        <label htmlFor='picture'>Profile Picture</label>
+        <P isDescription>Upload a picture of the animal</P>
+        <Button onClick={handleClick}>Upload a file</Button>
+        <Input
+          type='file'
+          name='picture'
+          accept='.jpg,.jpeg,.png,.svg'
+          onChange={updateImage}
+          style={{ display: 'none' }}
+          ref={hiddenFileInput}
+        />
         <label htmlFor='name'>Name</label>
         <Input
           type='text'
@@ -217,17 +228,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
             <span className='radio__label'>Male</span>
           </label>
         </RadioWrapper>
-        <label htmlFor='picture'>Profile Picture</label>
-        <P isDescription>Upload a picture of the animal</P>
-        <Button onClick={handleClick}>Upload a file</Button>
-        <Input
-          type='file'
-          name='picture'
-          accept='.jpg,.jpeg,.png,.svg'
-          onChange={updateImage}
-          style={{ display: 'none' }}
-          ref={hiddenFileInput}
-        />
+
         <label htmlFor='breed'>Breed</label>
         <Input
           type='text'
