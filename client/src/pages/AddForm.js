@@ -29,8 +29,8 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
   const [animal, setAnimal] = useState(initialAnimal);
 
   const hiddenFileInput = useRef(null);
-  const handleClick = () => {
-    hiddenFileInput.current.click();
+  const handleClick = (e) => {
+    hiddenFileInput.current && hiddenFileInput.current.click();
   };
 
   console.log('animal', animal);
@@ -160,17 +160,6 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           Please provide the following information about the Animal you wish to
           add:
         </P>
-        <label htmlFor='picture'>Profile Picture</label>
-        <P isDescription>Upload a picture of the animal</P>
-        <Button onClick={handleClick}>Upload a file</Button>
-        <Input
-          type='file'
-          name='picture'
-          accept='.jpg,.jpeg,.png,.svg'
-          onChange={updateImage}
-          style={{ display: 'none' }}
-          ref={hiddenFileInput}
-        />
         <label htmlFor='name'>Name</label>
         <Input
           type='text'
@@ -228,7 +217,6 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
             <span className='radio__label'>Male</span>
           </label>
         </RadioWrapper>
-
         <label htmlFor='breed'>Breed</label>
         <Input
           type='text'
@@ -241,6 +229,19 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           traits={animal.characteristics}
           onRemoveTrait={removeTrait}
           onUpdateTraits={updateTraits}
+        />
+        <h5>Profile Picture</h5>
+        <P isDescription>Upload a picture of the animal</P>
+        <Label onClick={handleClick} htmlFor='picture'>
+          Profile Picture{' '}
+        </Label>
+        <Input
+          type='file'
+          name='picture'
+          accept='.jpg,.jpeg,.png,.svg'
+          onChange={updateImage}
+          style={{ display: 'none' }}
+          ref={hiddenFileInput}
         />
         <label htmlFor='description'>Description</label>
         <Textarea
@@ -314,6 +315,12 @@ const Form = styled.form`
   span {
     color: var(--secondary);
   }
+
+  h5 {
+    padding-top: 0.4rem;
+    margin: 0rem;
+    font-size: 1.5rem;
+  }
 `;
 
 const P = styled.p`
@@ -355,6 +362,10 @@ const Select = styled.select`
   height: 2.5rem;
   text-align-last: center;
   width: 70vw;
+
+  &:focus {
+    outline-color: var(--white);
+  }
 `;
 
 const AgeInput = styled(Input)`
@@ -433,6 +444,21 @@ const RadioWrapper = styled.section`
   }
 `;
 
+const Label = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--gray);
+  border-radius: 100vw;
+  border: 1px solid black;
+  cursor: pointer;
+  font-family: var(--ff-cursive);
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  color: var(--black);
+  width: 10rem;
+  filter: drop-shadow(0 0 0.18rem black);
+`;
 const Button = styled.button`
   display: flex;
   align-items: center;
@@ -444,10 +470,7 @@ const Button = styled.button`
   font-size: 1.3rem;
   padding: 0.5rem;
   width: 9rem;
-
-  img {
-    width: 1rem;
-  }
+  filter: drop-shadow(0 0 0.1rem black);
 `;
 
 const Textarea = styled.textarea`
