@@ -11,7 +11,7 @@ function App() {
 
   async function addOrganizationsAndAnimals(organization, animal) {
     try {
-      const result = await fetch('http://localhost:4000/organizations', {
+      const result = await fetch('/organizations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ function App() {
     }
 
     try {
-      const result = await fetch('http://localhost:4000/animals', {
+      const result = await fetch('/animals', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
