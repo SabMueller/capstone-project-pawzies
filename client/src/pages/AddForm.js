@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import Characteristics from '../components/Characteristics';
 import Logo from '../assets/images/logo.svg';
+import ArrowIcon from '../assets/icons/ArrowIcon.svg';
+import UploadIcon from '../assets/icons/UploadIcon.svg';
+import {
+  validateAnimalTrait,
+  validateOrganization,
+  validateAnimal,
+} from '../lib/Validation';
 
 export default function AddForm({ onAddOrganizationsAndAnimals }) {
   const initialOrganization = {
@@ -27,6 +34,8 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
 
   const [organization, setOrganization] = useState(initialOrganization);
   const [animal, setAnimal] = useState(initialAnimal);
+  const [isError, setIsError] = useState(false);
+  const [imageName, setImageName] = useState('');
 
   const hiddenFileInput = useRef(null);
   const handleClick = (e) => {
@@ -34,6 +43,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
   };
 
   console.log('animal', animal);
+  console.log('traits length', animal.characteristics.length);
 
   const uploadImage = (image) => {
     const data = new FormData();
@@ -53,9 +63,19 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    onAddOrganizationsAndAnimals(organization, animal);
-    setOrganization(initialOrganization);
-    setAnimal(initialAnimal);
+    if (
+      validateOrganization(organization) &&
+      validateAnimalTrait(animal.characteristics) &&
+      validateAnimal(animal)
+    ) {
+      onAddOrganizationsAndAnimals(organization, animal);
+      setOrganization(initialOrganization);
+      setAnimal(initialAnimal);
+      setIsError(false);
+    } else {
+      setIsError(true);
+      setTimeout(() => setIsError(false), 8000);
+    }
   }
 
   function updateOrganization(event) {
@@ -73,12 +93,15 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
   }
 
   function updateImage(event) {
+    const fileName = event.target.files[0].name;
     const fileSize = event.target.files[0].size;
     if (fileSize > 2097152) {
       alert(
         'Unfortunately, this Image is too big. Please choose another one that is less than 2MB'
       );
+      return false;
     } else uploadImage(event.target.files[0]);
+    setImageName(fileName);
   }
 
   function removeTrait(removeTrait) {
@@ -105,7 +128,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
       </h1>
       <Form onSubmit={handleFormSubmit}>
         <P>Please specify your organization below</P>
-        <label htmlFor='name'>Name</label>
+        <label htmlFor='name'>Name*</label>
         <Input
           type='text'
           name='name'
@@ -113,7 +136,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           value={organization.name}
           onChange={updateOrganization}
         />
-        <label htmlFor='email'>E-Mail</label>
+        <label htmlFor='email'>E-Mail*</label>
         <Input
           type='text'
           name='email'
@@ -121,65 +144,71 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           value={organization.email}
           onChange={updateOrganization}
         />
-        <label htmlFor='phone'>Phone</label>
+        <label htmlFor='phone'>Phone*</label>
         <Input
           type='text'
           name='phone'
           placeholder='Phone Number of your Organization'
           value={organization.phone}
           onChange={updateOrganization}
+          required
         />
         <AddressWrapper>
           <h4>Address</h4>
-          <label htmlFor='street'>Street</label>
+          <label htmlFor='street'>Street*</label>
           <Input
             type='text'
             name='street'
             placeholder='Street'
             value={organization.street}
             onChange={updateOrganization}
+            required
           />
-          <label htmlFor='zip'>ZIP Code</label>
+          <label htmlFor='zip'>ZIP Code*</label>
           <Input
             type='text'
             name='zip'
             placeholder='ZIP Code'
             value={organization.zip}
             onChange={updateOrganization}
+            required
           />
-          <label htmlFor='city'> City</label>
+          <label htmlFor='city'> City*</label>
           <Input
             type='text'
             name='city'
             placeholder='City / Location'
             value={organization.city}
             onChange={updateOrganization}
+            required
           />
         </AddressWrapper>
         <P>
           Please provide the following information about the Animal you wish to
           add:
         </P>
-        <label htmlFor='name'>Name</label>
+        <label htmlFor='name'>Name*</label>
         <Input
           type='text'
           name='name'
           placeholder='Name of the Animal'
           value={animal.name}
           onChange={updateAnimal}
+          required
         />
-        <label htmlFor='type'>Type</label>
+        <label htmlFor='type'>Type*</label>
         <Select
           name='type'
           id='type'
           value={animal.type}
-          onChange={updateAnimal}>
+          onChange={updateAnimal}
+          required>
           <option value=''>Select the Animal Type</option>
           <option value='cat'>Cat</option>
           <option value='dog'>Dog</option>
           <option value='small_animals'>Small Animals</option>
         </Select>
-        <label htmlFor='age'>Age</label>
+        <label htmlFor='age'>Age*</label>
         <AgeInput
           type='number'
           name='age'
@@ -188,7 +217,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           onChange={updateAnimal}
         />
 
-        <label htmlFor='gender'>Gender</label>
+        <label htmlFor='gender'>Gender*</label>
         <RadioWrapper>
           <label className='radio'>
             <span className='radio__input'>
@@ -198,6 +227,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
                 value='female'
                 checked={animal.gender === 'female'}
                 onChange={updateAnimal}
+                required
               />
               <span className='radio__control'></span>
             </span>
@@ -211,29 +241,33 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
                 value='male'
                 checked={animal.gender === 'male'}
                 onChange={updateAnimal}
+                required
               />
               <span className='radio__control'></span>
             </span>
             <span className='radio__label'>Male</span>
           </label>
         </RadioWrapper>
-        <label htmlFor='breed'>Breed</label>
+        <label htmlFor='breed'>Breed*</label>
         <Input
           type='text'
           name='breed'
           placeholder='Breed of the Animal'
           value={animal.breed}
           onChange={updateAnimal}
+          required
         />
         <Characteristics
           traits={animal.characteristics}
           onRemoveTrait={removeTrait}
           onUpdateTraits={updateTraits}
+          required
         />
         <h5>Profile Picture</h5>
         <P isDescription>Upload a picture of the animal</P>
         <Label onClick={handleClick} htmlFor='picture'>
           Profile Picture{' '}
+          <img style={{ width: '1.5rem' }} src={UploadIcon} alt='upload icon' />
         </Label>
         <Input
           type='file'
@@ -243,7 +277,10 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           style={{ display: 'none' }}
           ref={hiddenFileInput}
         />
-        <label htmlFor='description'>Description</label>
+        <P isDescription style={{ fontWeight: 'bolder' }}>
+          Selected file: {imageName}
+        </P>
+        <label htmlFor='description'>Description*</label>
         <Textarea
           name='description'
           id='description'
@@ -252,11 +289,31 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
           onChange={updateAnimal}
           cols='30'
           rows='10'
+          required
         />
-        <Link style={{ textDecoration: 'none' }} to='/'>
-          <Button type='button'>Go Back</Button>
-        </Link>
-        <Button>SUBMIT</Button>
+        {isError ? (
+          <ErrorBox>
+            Something went wrong! Please check if your Organization data is
+            correct and if you entered more than 2 characteristics for your
+            Animal and try again.
+          </ErrorBox>
+        ) : null}
+        <ButtonWrapper>
+          <Link style={{ textDecoration: 'none' }} to='/'>
+            <Button type='button'>
+              <Icon isLeft src={ArrowIcon} alt='arrow pointing left' />
+              GO BACK
+            </Button>
+          </Link>
+          <Button>
+            SUBMIT
+            <img
+              src={ArrowIcon}
+              alt='arrow pointing right'
+              style={{ width: '0.8rem' }}
+            />
+          </Button>
+        </ButtonWrapper>
       </Form>
     </FormWrapper>
   );
@@ -456,13 +513,24 @@ const Label = styled.label`
   font-size: 1.3rem;
   padding: 0.5rem;
   color: var(--black);
-  width: 10rem;
-  filter: drop-shadow(0 0 0.18rem black);
+  width: 13rem;
+  filter: drop-shadow(0 0 0.18rem var(--black));
 `;
-const Button = styled.button`
+
+const ButtonWrapper = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
+  width: 80vw;
+`;
+
+const Icon = styled.img`
+  transform: scaleX(-1);
+  width: 0.8rem;
+`;
+
+const Button = styled.button`
   background-color: var(--gray);
   border-radius: 100vw;
   cursor: pointer;
@@ -470,7 +538,10 @@ const Button = styled.button`
   font-size: 1.3rem;
   padding: 0.5rem;
   width: 9rem;
-  filter: drop-shadow(0 0 0.1rem black);
+  filter: drop-shadow(0 0 0.1rem var(--black));
+  margin: 0.3rem 0;
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 const Textarea = styled.textarea`
@@ -494,4 +565,16 @@ const Textarea = styled.textarea`
   &::placeholder {
     color: darkgray;
   }
+`;
+
+const ErrorBox = styled.div`
+  background: var(--error);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: var(--white);
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  box-shadow: 1px 1px 2px var(--black);
 `;

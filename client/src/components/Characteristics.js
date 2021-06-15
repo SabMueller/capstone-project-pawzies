@@ -24,9 +24,9 @@ export default function Characteristics({
 
   return (
     <TraitWrapper>
-      <label htmlFor='characteristics'>Characteristics</label>
+      <label htmlFor='characteristics'>Characteristics*</label>
       <P isDescription>
-        Put in some character traits of the animal and press{' '}
+        Put in at least 2 character traits of your animal and press{' '}
         <span style={{ fontWeight: 'bold' }}>Enter</span> to add them.
       </P>
       <Traits>
