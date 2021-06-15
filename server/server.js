@@ -27,6 +27,11 @@ const server = express();
 server.use(cors());
 
 server.use(express.json());
+
+server.get('/health', (req, res) =>
+  res.json({ message: 'Server is up and running!' })
+);
+
 server.use(organizationRoutes);
 server.use(animalRoutes);
 
@@ -34,10 +39,6 @@ server.use(express.static(path.join(__dirname, '../client/build')));
 server.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
-
-server.get('/health', (req, res) =>
-  res.json({ message: 'Server is up and running!' })
-);
 
 const port = process.env.PORT || 4000;
 server.listen(port);
