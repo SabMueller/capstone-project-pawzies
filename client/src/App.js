@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-//import styled from 'styled-components/macro';
 import Home from './pages/Home';
 import Navigation from './components/Navigation';
 import AddForm from './pages/AddForm';
