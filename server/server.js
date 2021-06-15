@@ -2,9 +2,13 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path';
+import dirname from './lib/pathHelpers.js';
 
 import organizationRoutes from './routes/organizations.routes.js';
 import animalRoutes from './routes/animals.routes.js';
+
+const __dirname = dirname(import.meta.url);
 
 dotenv.config();
 
@@ -26,8 +30,14 @@ server.use(express.json());
 server.use(organizationRoutes);
 server.use(animalRoutes);
 
-server.get('/', (req, res) =>
+server.use(express.static(path.join(__dirname, '../client/build')));
+server.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+server.get('/health', (req, res) =>
   res.json({ message: 'Server is up and running!' })
 );
 
-server.listen(4000);
+const port = process.env.PORT || 4000;
+server.listen(port);

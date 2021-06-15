@@ -18,11 +18,9 @@ function postOrganization(req, res) {
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
-    description: req.body.description,
-    address: req.body.address,
-    postal_code: req.body.postal_code,
-    location: req.body.location,
-    picture: req.body.picture,
+    street: req.body.address,
+    zip: req.body.zip,
+    city: req.body.city,
   });
   organization
     .save()
@@ -65,17 +63,3 @@ export {
   updateOrganization,
   deleteOrganization,
 };
-
-//postman Template
-/*
-{
-"name": "",
-"email": "",
-"phone": "",
-"description": "",
-"address": "",
-"postal code": ,
-"location": "",
-"picture": ""
-}
-*/

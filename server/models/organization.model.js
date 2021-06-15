@@ -4,11 +4,9 @@ const organizationSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  description: String,
-  address: String,
-  postal_code: Number,
-  location: String,
-  picture: String,
+  street: String,
+  zip: Number,
+  CountQueuingStrategy: String,
 });
 
 const Organization = mongoose.model('Organization', organizationSchema);

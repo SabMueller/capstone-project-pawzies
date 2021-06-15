@@ -4,11 +4,14 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "scripts": {
+    "build": "cd ./client && npm run build",
     "client": "cd ./client && npm start",
     "cy:open": "cd ./client && npm run cy:open",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd ./server && npm start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd ./client && npm install && cd ../server && npm install"
   },
   "repository": {
     "type": "git",

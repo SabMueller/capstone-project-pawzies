@@ -1,28 +1,48 @@
-//import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 //import styled from 'styled-components/macro';
 import Home from './pages/Home';
 import Navigation from './components/Navigation';
+import AddForm from './pages/AddForm';
 
 function App() {
-  /*   useEffect(() => {
-    fetch('http://localhost:4000/')
-      .then((res) => res.json())
-      .then((response) => setServerMessage(response));
-  }); */
+  const [organizations, setOrganizations] = useState([]);
+  const [animals, setAnimals] = useState([]);
+
+  async function addOrganizationsAndAnimals(organization, animal) {
+    try {
+      const result = await fetch('/organizations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(organization),
+      });
+      const organizationSaved = await result.json();
+      setOrganizations([...organizations, organizationSaved]);
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const result = await fetch('/animals', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(animal),
+      });
+      const animalSaved = await result.json();
+      setAnimals([...animals, animalSaved]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   function AnimalSearch() {
     return (
       <>
         <h1>Search Animal</h1>
-      </>
-    );
-  }
-
-  function AnimalForm() {
-    return (
-      <>
-        <h1>Add Animal</h1>
       </>
     );
   }
@@ -52,7 +72,7 @@ function App() {
   }
 
   return (
-    <main className='App'>
+    <div className='App'>
       <Navigation />
       <Switch>
         <Route exact path='/'>
@@ -61,8 +81,8 @@ function App() {
         <Route path='/search'>
           <AnimalSearch />
         </Route>
-        <Route path='/add-animal'>
-          <AnimalForm />
+        <Route path='/add'>
+          <AddForm onAddOrganizationsAndAnimals={addOrganizationsAndAnimals} />
         </Route>
         <Route path='/main'>
           <Main />
@@ -80,7 +100,7 @@ function App() {
           <BreedInfo />
         </Route> */}
       </Switch>
-    </main>
+    </div>
   );
 }
 

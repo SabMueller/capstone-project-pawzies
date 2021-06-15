@@ -23,7 +23,7 @@ export default function Home() {
           </PrimaryButton>
         </StyledLink>
         <Paragraph isSecondary>For Organizations:</Paragraph>
-        <StyledLink to='/add-animal'>
+        <StyledLink to='/add'>
           <Button>
             ADD PET
             <img
@@ -49,7 +49,8 @@ const LandingPageWrapper = styled.section`
     rgba(31, 153, 182, 1) 32%,
     rgba(8, 55, 118, 1) 100%
   );
-  height: 100vh;
+  height: 101vh;
+  width: 101vw;
   margin: 0;
 `;
 

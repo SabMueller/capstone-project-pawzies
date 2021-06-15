@@ -17,6 +17,7 @@ export default createGlobalStyle`
   --white: hsl(0, 0%, 99%);
   --black: 	hsl(187, 6%, 15%); 
   --blue-dark: 	hsl(225, 41%, 25%);
+  --error: hsl(0, 74%, 18%);
   --gray-dark: 	hsl(224, 16%, 28%);
   --gray: hsl(224, 16%, 87%);
   --gray-light:hsl(225, 24%, 93%);
