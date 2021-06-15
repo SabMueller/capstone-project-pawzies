@@ -10,7 +10,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd ./server && npm start",
     "start": "node ./server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd ./client && npm install && cd ../server && npm install"
   },
   "repository": {
     "type": "git",
