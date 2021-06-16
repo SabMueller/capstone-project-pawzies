@@ -70,7 +70,6 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
       onAddOrganizationsAndAnimals(organization, animal);
       setOrganization(initialOrganization);
       setAnimal(initialAnimal);
-      setIsSuccessView(true);
       setIsError(false);
       setIsSuccessView(true);
       setIsStandardView(false);
@@ -159,12 +158,12 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
               onHandleClick={handleClick}
               onUpdateTraits={updateTraits}
             />
-            {isError ? (
+            {isError && (
               <ErrorBox>
                 Something went wrong! Please check if you've entered everything
                 correctly and try again.
               </ErrorBox>
-            ) : null}
+            )}
             <ButtonWrapper>
               <Link style={{ textDecoration: 'none' }} to='/'>
                 <Button type='button'>
