@@ -42,15 +42,14 @@ const LandingPageWrapper = styled.section`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background: rgb(49, 211, 211);
   background: linear-gradient(
     180deg,
     rgba(49, 211, 211, 1) 0%,
     rgba(31, 153, 182, 1) 32%,
     rgba(8, 55, 118, 1) 100%
   );
-  height: 101vh;
-  width: 101vw;
+  height: 100vh;
+  width: 100vw;
   margin: 0;
 `;
 
