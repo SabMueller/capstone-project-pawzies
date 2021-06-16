@@ -8,7 +8,6 @@ const validateCity = (city) => city.match(/^[A-Za-z]+$/);
 
 const validatePhone = (phone) => phone.match(/^[0-9]+$/);
 const validateZip = (zip) => zip.match(/^[0-9]+$/);
-const validateStreet = (street) => street.match(/^[A-Za-z\d\-_\s]+$/i);
 
 const validateAge = (age) => parseFloat(age) <= 25;
 const validateBreed = (breed) => breed.match(/^[A-Za-z]+$/);
@@ -19,8 +18,7 @@ export function validateOrganization(organization) {
     validateEmail(organization.email) &&
     validateCity(organization.city) &&
     validatePhone(organization.phone) &&
-    validateZip(organization.zip) &&
-    validateStreet(organization.street)
+    validateZip(organization.zip)
   );
 }
 export function validateAnimal(animal) {
