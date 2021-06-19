@@ -4,13 +4,15 @@ const validateEmail = (email) =>
     email
   );
 
-const validateCity = (city) => city.match(/^[A-Za-z]+$/);
+const validateCity = (city) => /^[A-Za-z]+$/.test(city);
 
-const validatePhone = (phone) => phone.match(/^[0-9]+$/);
-const validateZip = (zip) => zip.match(/^[0-9]+$/);
+const validatePhone = (phone) => /^[0-9]+$/.test(phone);
+const validateZip = (zip) => /^[0-9]+$/.test(zip);
+const validateStreet = (street) =>
+  /^([A-Za-zäöüßsd.,-]+?)\s+([A-Za-zäöüßsd.,-]*?)\s*(\w+)?$/.test(street);
 
 const validateAge = (age) => parseFloat(age) <= 25;
-const validateBreed = (breed) => breed.match(/^[A-Za-z]+$/);
+const validateBreed = (breed) => /^[A-Za-z]+$/.test(breed);
 
 export function validateOrganization(organization) {
   return (
@@ -18,7 +20,8 @@ export function validateOrganization(organization) {
     validateEmail(organization.email) &&
     validateCity(organization.city) &&
     validatePhone(organization.phone) &&
-    validateZip(organization.zip)
+    validateZip(organization.zip) &&
+    validateStreet(organization.street)
   );
 }
 export function validateAnimal(animal) {

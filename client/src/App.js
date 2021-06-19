@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AddForm from './pages/AddForm';
 import AnimalSearch from './pages/AnimalSearch';
+import Favorites from './pages/Favorites';
 import Home from './pages/Home';
 import Main from './pages/Main';
 
@@ -37,14 +38,6 @@ function App() {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  function Favorites() {
-    return (
-      <>
-        <h1>Favorites</h1>
-      </>
-    );
   }
 
   function Contact() {

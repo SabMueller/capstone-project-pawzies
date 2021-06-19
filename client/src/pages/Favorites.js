@@ -1,9 +1,9 @@
 import Navigation from '../components/Navigation';
 
-export default function AnimalSearch() {
+export default function Favorites() {
   return (
     <>
-      <h1>Animal Search</h1>
+      <h1>Favorites</h1>
       <Navigation />
     </>
   );
