@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Navigation from './components/Navigation';
 import AddForm from './pages/AddForm';
+import AnimalSearch from './pages/AnimalSearch';
+import Favorites from './pages/Favorites';
+import Home from './pages/Home';
+import Main from './pages/Main';
 
 function App() {
   const [organizations, setOrganizations] = useState([]);
@@ -38,30 +40,6 @@ function App() {
     }
   }
 
-  function AnimalSearch() {
-    return (
-      <>
-        <h1>Search Animal</h1>
-      </>
-    );
-  }
-
-  function Main() {
-    return (
-      <>
-        <h1>Main</h1>
-      </>
-    );
-  }
-
-  function Favorites() {
-    return (
-      <>
-        <h1>Favorites</h1>
-      </>
-    );
-  }
-
   function Contact() {
     return (
       <>
@@ -72,7 +50,6 @@ function App() {
 
   return (
     <div className='App'>
-      <Navigation />
       <Switch>
         <Route exact path='/'>
           <Home />
