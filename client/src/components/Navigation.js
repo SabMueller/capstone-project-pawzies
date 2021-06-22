@@ -2,14 +2,14 @@ import { NavLink } from 'react-router-dom/';
 import styled from 'styled-components/macro';
 import { useSpring, animated, config } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import logoIcon from '../assets/icons/LogoIcon.svg';
-import homeIcon from '../assets/icons/homeEmpty.svg';
-import homeActiveIcon from '../assets/icons/homeFilled.svg';
-import favoritesIcon from '../assets/icons/favoritesEmpty.svg';
-import favoritesActiveIcon from '../assets/icons/favoritesFilled.svg';
-import searchIcon from '../assets/icons/searchEmpty.svg';
-import searchActiveIcon from '../assets/icons/searchFilled.svg';
-import cancelIcon from '../assets/icons/Cancel.svg';
+import logoIcon from '../assets/images/logoIcon.svg';
+import homeIcon from '../assets/images/homeEmpty.svg';
+import homeActiveIcon from '../assets/images/homeFilled.svg';
+import favoritesIcon from '../assets/images/favoritesEmpty.svg';
+import favoritesActiveIcon from '../assets/images/favoritesFilled.svg';
+import searchIcon from '../assets/images/searchEmpty.svg';
+import searchActiveIcon from '../assets/images/searchFilled.svg';
+import cancelIcon from '../assets/images/cancel.svg';
 
 export default function Navigation() {
   const height = 4 * 60 + 80;
