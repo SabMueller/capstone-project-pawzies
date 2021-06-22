@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import Logo from '../assets/images/logo.svg';
-import ArrowIcon from '../assets/icons/ArrowIcon.svg';
+import ArrowIcon from '../assets/images/arrowIcon.svg';
 
 export default function Home() {
   return (

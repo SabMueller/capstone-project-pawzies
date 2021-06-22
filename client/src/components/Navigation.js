@@ -2,14 +2,14 @@ import { NavLink } from 'react-router-dom/';
 import styled from 'styled-components/macro';
 import { useSpring, animated, config } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import logoIcon from '../assets/icons/LogoIcon.svg';
-import homeIcon from '../assets/icons/homeEmpty.svg';
-import homeActiveIcon from '../assets/icons/homeFilled.svg';
-import favoritesIcon from '../assets/icons/favoritesEmpty.svg';
-import favoritesActiveIcon from '../assets/icons/favoritesFilled.svg';
-import searchIcon from '../assets/icons/searchEmpty.svg';
-import searchActiveIcon from '../assets/icons/searchFilled.svg';
-import cancelIcon from '../assets/icons/Cancel.svg';
+import logoIcon from '../assets/images/logoIcon.svg';
+import homeIcon from '../assets/images/homeEmpty.svg';
+import homeActiveIcon from '../assets/images/homeFilled.svg';
+import favoritesIcon from '../assets/images/favoritesEmpty.svg';
+import favoritesActiveIcon from '../assets/images/favoritesFilled.svg';
+import searchIcon from '../assets/images/searchEmpty.svg';
+import searchActiveIcon from '../assets/images/searchFilled.svg';
+import cancelIcon from '../assets/images/cancel.svg';
 
 export default function Navigation() {
   const height = 4 * 60 + 80;
@@ -83,14 +83,14 @@ const NavWrapper = styled.section`
     justify-content: center;
 
     background: var(--white);
+    border: 1px solid var(--gray);
     border-radius: 50%;
-    bottom: 0;
+    bottom: -4%;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
       0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0);
     filter: drop-shadow(0 0 0.1rem black);
     height: 4rem;
     left: 50%;
-    border: 1px solid var(--gray);
     position: fixed;
     transform: translate(-50%, -50%);
     width: 4rem;

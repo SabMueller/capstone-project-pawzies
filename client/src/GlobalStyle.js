@@ -46,9 +46,15 @@ body, h1, h2, h3, p {
 }
 
 body {
-  line-height: 1.5;
+  background: linear-gradient(
+    180deg,
+    rgba(49, 211, 211, 1) 0%,
+    rgba(31, 153, 182, 1) 32%,
+    rgba(8, 55, 118, 1) 100%
+  );
   font-family: var(--ff-sans);
   font-size: 1.25rem; 
+  line-height: 1.5;
 }
 
 ul[class],

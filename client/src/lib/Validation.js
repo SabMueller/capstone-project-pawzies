@@ -18,7 +18,7 @@ export function validateOrganization(organization) {
   return (
     validateName(organization.name) &&
     validateEmail(organization.email) &&
-    validateCity(organization.city) &&
+    /*     validateCity(organization.city) && */
     validatePhone(organization.phone) &&
     validateZip(organization.zip) &&
     validateStreet(organization.street)
@@ -27,7 +27,7 @@ export function validateOrganization(organization) {
 export function validateAnimal(animal) {
   return (
     validateAge(animal.age) &&
-    validateBreed(animal.breed) &&
+    /*     validateBreed(animal.breed) && */
     validateName(animal.name)
   );
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import Characteristics from '../components/Characteristics';
-import UploadIcon from '../assets/icons/UploadIcon.svg';
+import UploadIcon from '../assets/images/uploadIcon.svg';
 
 export default function AnimalForm({
   animal,

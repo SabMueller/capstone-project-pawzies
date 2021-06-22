@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AddForm from './pages/AddForm';
 import AnimalSearch from './pages/AnimalSearch';
@@ -9,6 +9,21 @@ import Main from './pages/Main';
 function App() {
   const [organizations, setOrganizations] = useState([]);
   const [animals, setAnimals] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:4000/organizations')
+      .then((result) => result.json())
+      .then((apiOrganizations) => setOrganizations(apiOrganizations))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:4000/animals')
+      .then((result) => result.json())
+      .then((apiAnimals) => setAnimals(apiAnimals))
+      .catch((error) => console.error(error));
+  }, []);
 
   async function addOrganizationsAndAnimals(organization, animal) {
     try {
@@ -48,6 +63,18 @@ function App() {
     );
   }
 
+  function toggleFavoritesAndFilter(favoriteAnimal) {
+    const animalFavorites = animals.map((animal) => {
+      if (animal._id === favoriteAnimal._id) {
+        animal.isFavorite = !animal.isFavorite;
+      }
+      return animal;
+    });
+    setAnimals(animalFavorites);
+    const favoriteAnimals = animals.filter((animal) => animal.isFavorite);
+    setFavorites(favoriteAnimals);
+  }
+
   return (
     <div className='App'>
       <Switch>
@@ -61,7 +88,11 @@ function App() {
           <AddForm onAddOrganizationsAndAnimals={addOrganizationsAndAnimals} />
         </Route>
         <Route path='/main'>
-          <Main />
+          <Main
+            organizations={organizations}
+            animals={animals}
+            onToggleFavoritesAndFilter={toggleFavoritesAndFilter}
+          />
         </Route>
         <Route path='/favorites'>
           <Favorites />
