@@ -82,7 +82,7 @@ export default function AnimalCard({animals, organizations, onToggleFavoritesAnd
 const AnimalCardRendered = styled.section`
   background-color: var(--white);
   border-radius: 2rem;
-  filter: drop-shadow(0 0 0.2rem black);
+  filter: drop-shadow(0 0 0.2rem var(--black));
   letter-spacing: 0.1rem;
   margin-bottom: 1rem;
 `;
@@ -158,8 +158,8 @@ const AnimalBreed = styled.div`
 
   h3 {
     font-family: var(--ff-sans-serif);
-    font-weight: normal;
     font-size: 1.3rem;
+    font-weight: normal;
   }
 `;
 
@@ -167,8 +167,8 @@ const AnimalGender = styled(AnimalBreed)`
   margin-top: 0.5rem;
 
   img {
-    width: 1.5rem;
     margin-right: 0.3rem;
+    width: 1.5rem;
   }
 `;
 
@@ -211,8 +211,8 @@ const Description = styled.p`
 const Traits = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
   gap: 0.5rem;
+  justify-content: space-evenly;
 
   margin: 1rem 0;
 
