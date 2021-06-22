@@ -83,14 +83,14 @@ const NavWrapper = styled.section`
     justify-content: center;
 
     background: var(--white);
+    border: 1px solid var(--gray);
     border-radius: 50%;
-    bottom: 0;
+    bottom: -4%;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
       0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0);
     filter: drop-shadow(0 0 0.1rem black);
     height: 4rem;
     left: 50%;
-    border: 1px solid var(--gray);
     position: fixed;
     transform: translate(-50%, -50%);
     width: 4rem;

@@ -30,7 +30,6 @@ export default function OrganizationForm({
         placeholder='Phone Number of your Organization'
         value={organization.phone}
         onChange={onUpdateOrganization}
-        required
       />
       <AddressWrapper>
         <h4>Address</h4>

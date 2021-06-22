@@ -6,7 +6,7 @@ const organizationSchema = new mongoose.Schema({
   phone: String,
   street: String,
   zip: Number,
-  CountQueuingStrategy: String,
+  city: String,
 });
 
 const Organization = mongoose.model('Organization', organizationSchema);

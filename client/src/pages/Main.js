@@ -1,23 +1,23 @@
 import styled from 'styled-components/macro';
+import AnimalCard from '../components/AnimalCard';
 import Navigation from '../components/Navigation';
 
-export default function Main() {
+
+export default function Main({ organizations, animals, onToggleFavoritesAndFilter }) {
+
   return (
-    <div style={{ backgroundColor: 'var(--black)', height: '100vh' }}>
-      <h1>Main</h1>
+    <section>
+      <ResultsText>
+        We found <span style={{ fontWeight: 'bold' }}>{animals.length}</span>{' '}
+        results matching your search:
+      </ResultsText>
+      <AnimalCard organizations={organizations} animals={animals} onToggleFavoritesAndFilter={onToggleFavoritesAndFilter} />
       <Navigation />
-    </div>
+    </section>
   );
 }
 
-//        <a.div className='bg' onClick={() => close()} style={bgStyle}></a.div>
-/* const close = (velocity = 0) => {
-    set({ y: height, immediate: false, config: { ...config.stiff, velocity } });
-  }; */
-/*   const bgStyle = {
-    transform: y.to(
-      [0, height],
-      ['translateY(-8%) scale(1.16)', 'translateY(0px) scale(1.05)']
-    ),
-    opacity: y.to([0, height], [0.4, 1], 'clamp'),
-  }; */
+const ResultsText = styled.p`
+  letter-spacing: 0.05rem;
+  padding: 0.5rem;
+`;

@@ -9,7 +9,7 @@ import {
   validateAnimal,
 } from '../lib/Validation';
 import Logo from '../assets/images/logo.svg';
-import ArrowIcon from '../assets/icons/ArrowIcon.svg';
+import ArrowIcon from '../assets/images/arrowIcon.svg';
 
 export default function AddForm({ onAddOrganizationsAndAnimals }) {
   const initialOrganization = {
@@ -38,6 +38,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
   const [imageName, setImageName] = useState('');
   const [isSuccessView, setIsSuccessView] = useState(false);
   const [isStandardView, setIsStandardView] = useState(true);
+
 
   const hiddenFileInput = useRef(null);
   const handleClick = (e) => {
@@ -147,6 +148,8 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
             <OrganizationForm
               organization={organization}
               onUpdateOrganization={updateOrganization}
+              animal={animal}
+              onUpdateAnimal={updateAnimal}
             />
             <AnimalForm
               animal={animal}
