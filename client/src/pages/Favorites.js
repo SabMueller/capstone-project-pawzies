@@ -20,34 +20,30 @@ export default function Favorites({
       {favorites.map((favorite, index) => (
         <FavoriteCardWrapper key={favorite._id}>
           <FavoriteCard>
-            <FavoriteProfile src={favorite.picture} alt='favorite profile' />
+            <FavoriteProfilePicture
+              src={favorite.picture}
+              alt='favorite profile'
+            />
             <FavoriteName>{favorite.name.toUpperCase()}</FavoriteName>
             <FavoriteIcon
               src={favoriteIcon}
               alt='favorite Icon'
               onClick={() => onToggleFavoritesAndFilter(favorite)}
-              style={
-                favorite.isFavorite
-                  ? {
-                      opacity: '100%',
-                      transition: 'all 0.4s ease-in',
-                      transform: 'scale(1.2)',
-                    }
-                  : { opacity: '40%', transition: 'all 0.5s ease.out' }
-              }
             />
             <FavoriteInfo>
               <FavoriteInfoWrapper>
-                {favorite.type === 'cat' ? (
+                {favorite.type === 'cat' && (
                   <CatIcon src={cat} alt='cat icon' />
-                ) : null || favorite.type === 'dog' ? (
+                )}{' '}
+                {favorite.type === 'dog' && (
                   <DogIcon src={dog} alt='dog icon' />
-                ) : null || favorite.type === 'small_animals' ? (
+                )}
+                {favorite.type === 'small_animals' && (
                   <SmallAnimalsIcon
                     src={smallAnimals}
                     alt='small Favorites icon'
                   />
-                ) : null}
+                )}
                 <h3>{favorite.breed}</h3>
               </FavoriteInfoWrapper>
               {organizations
@@ -66,10 +62,7 @@ export default function Favorites({
           <Link to='/contact'>
             <ContactButton type='button'>
               GET IN TOUCH
-              <img
-                src={ArrowIcon}
-                alt='An Icon displaying an arrow pointing to the right'
-              />
+              <img src={ArrowIcon} alt='contact icon' />
             </ContactButton>
           </Link>
         </FavoriteCardWrapper>
@@ -106,7 +99,7 @@ const FavoriteCard = styled.section`
   padding: 0 0.25rem;
 `;
 
-const FavoriteProfile = styled.img`
+const FavoriteProfilePicture = styled.img`
   grid-column: 1/2;
 
   border: 1px solid var(--blue-dark);
@@ -149,23 +142,23 @@ const FavoriteInfo = styled.div`
 `;
 
 const OrganizationIcon = styled.img`
-  width: 1.7rem;
   margin-left: 0.5rem;
+  width: 1.7rem;
 `;
 
 const CatIcon = styled.img`
-  width: 1.5rem;
   margin-left: 0.5rem;
+  width: 1.5rem;
 `;
 
 const DogIcon = styled.img`
-  width: 1.7rem;
   margin-left: 0.5rem;
+  width: 1.7rem;
 `;
 
 const SmallAnimalsIcon = styled.img`
-  width: 1.9rem;
   margin-left: 0.5rem;
+  width: 1.9rem;
 `;
 
 const FavoriteInfoWrapper = styled.div`
