@@ -51,6 +51,8 @@ body {
     rgba(49, 211, 211, 1) 0%,
     rgba(31, 153, 182, 1) 32%,
     rgba(8, 55, 118, 1) 100%
+  ) no-repeat center center fixed;
+  height: auto;
   );
   font-family: var(--ff-sans);
   font-size: 1.25rem; 

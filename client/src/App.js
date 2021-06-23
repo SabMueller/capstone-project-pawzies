@@ -95,7 +95,7 @@ function App() {
           />
         </Route>
         <Route path='/favorites'>
-          <Favorites />
+          <Favorites favorites={favorites} organizations={organizations} onToggleFavoritesAndFilter={toggleFavoritesAndFilter} />
         </Route>
         <Route path='/contact'>
           <Contact />
