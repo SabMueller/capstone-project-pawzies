@@ -144,7 +144,7 @@ const Button = styled.button`
 const AnimalShortInfo = styled.section`
   padding: 0.2rem 0.5rem;
   margin-top: 2rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 3rem;
 
   span {
     display: block;
