@@ -4,12 +4,17 @@ import AddForm from './pages/AddForm';
 import AnimalSearch from './pages/AnimalSearch';
 import Favorites from './pages/Favorites';
 import Home from './pages/Home';
+import { loadFromLocal, saveToLocal } from './lib/localStorage';
 import Main from './pages/Main';
 
 function App() {
   const [organizations, setOrganizations] = useState([]);
   const [animals, setAnimals] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(loadFromLocal('favorites') ?? []);
+
+  useEffect(() => {
+    saveToLocal('favorites', favorites);
+  }, [favorites]);
 
   useEffect(() => {
     fetch('http://localhost:4000/organizations')
@@ -95,7 +100,11 @@ function App() {
           />
         </Route>
         <Route path='/favorites'>
-          <Favorites favorites={favorites} organizations={organizations} onToggleFavoritesAndFilter={toggleFavoritesAndFilter} />
+          <Favorites
+            favorites={favorites}
+            organizations={organizations}
+            onToggleFavoritesAndFilter={toggleFavoritesAndFilter}
+          />
         </Route>
         <Route path='/contact'>
           <Contact />
