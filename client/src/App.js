@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { loadFromLocal, saveToLocal } from './lib/localStorage';
 import AddForm from './pages/AddForm';
 import AnimalSearch from './pages/AnimalSearch';
 import Favorites from './pages/Favorites';
 import Home from './pages/Home';
-import { loadFromLocal, saveToLocal } from './lib/localStorage';
 import Main from './pages/Main';
 
 function App() {
