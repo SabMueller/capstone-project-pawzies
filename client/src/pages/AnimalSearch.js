@@ -4,11 +4,7 @@ import styled from 'styled-components/macro';
 import ArrowIcon from '../assets/images/arrowIcon.svg';
 import Logo from '../assets/images/logo.svg';
 
-export default function AnimalSearch({
-  animals,
-  filteredResults,
-  onSetFilteredResults,
-}) {
+export default function AnimalSearch({ animals, onSetFilteredResults }) {
   const initialSelectedValues = {
     animalType: '',
     gender: '',

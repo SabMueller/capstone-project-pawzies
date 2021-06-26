@@ -90,7 +90,6 @@ function App() {
         <Route path='/search'>
           <AnimalSearch
             animals={animals}
-            filteredResults={filteredResults}
             onSetFilteredResults={setFilteredResults}
           />
         </Route>
