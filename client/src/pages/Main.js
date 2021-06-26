@@ -47,12 +47,13 @@ const ResultsText = styled.p`
 `;
 
 const ErrorWrapper = styled.section`
-  letter-spacing: 0.05rem;
-  padding: 4rem;
   display: grid;
   place-items: center;
+
   letter-spacing: 0.05rem;
   line-height: 1.8;
+  padding: 4rem;
+  letter-spacing: 0.05rem;
 
   p {
     color: white;
