@@ -53,7 +53,7 @@ body {
     rgba(8, 55, 118, 1) 100%
   ) no-repeat center center fixed;
   height: auto;
-  );
+
   font-family: var(--ff-sans);
   font-size: 1.25rem; 
   line-height: 1.5;

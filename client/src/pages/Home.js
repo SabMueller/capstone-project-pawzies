@@ -16,20 +16,14 @@ export default function Home() {
         <StyledLink to='/search'>
           <PrimaryButton>
             GO!
-            <img
-              src={ArrowIcon}
-              alt='An Icon displaying an arrow pointing to the right'
-            />
+            <img src={ArrowIcon} alt='Submit Icon' />
           </PrimaryButton>
         </StyledLink>
         <Paragraph isSecondary>For Organizations:</Paragraph>
         <StyledLink to='/add'>
           <Button>
             ADD PET
-            <img
-              src={ArrowIcon}
-              alt='An Icon displaying an arrow pointing to the right'
-            />
+            <img src={ArrowIcon} alt='Submit Icon' />
           </Button>
         </StyledLink>
       </TextWrapper>

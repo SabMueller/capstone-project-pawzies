@@ -11,6 +11,7 @@ function App() {
   const [organizations, setOrganizations] = useState([]);
   const [animals, setAnimals] = useState([]);
   const [favorites, setFavorites] = useState(loadFromLocal('favorites') ?? []);
+  const [filteredResults, setFilteredResults] = useState([]);
 
   useEffect(() => {
     saveToLocal('favorites', favorites);
@@ -87,7 +88,11 @@ function App() {
           <Home />
         </Route>
         <Route path='/search'>
-          <AnimalSearch />
+          <AnimalSearch
+            animals={animals}
+            filteredResults={filteredResults}
+            onSetFilteredResults={setFilteredResults}
+          />
         </Route>
         <Route path='/add'>
           <AddForm onAddOrganizationsAndAnimals={addOrganizationsAndAnimals} />
@@ -95,7 +100,7 @@ function App() {
         <Route path='/main'>
           <Main
             organizations={organizations}
-            animals={animals}
+            animals={filteredResults}
             onToggleFavoritesAndFilter={toggleFavoritesAndFilter}
           />
         </Route>
@@ -109,12 +114,6 @@ function App() {
         <Route path='/contact'>
           <Contact />
         </Route>
-        {/*         <Route path='/about-organization'>
-          <OrgnaizationInfo />
-        </Route>
-        <Route path='/about-breed'>
-          <BreedInfo />
-        </Route> */}
       </Switch>
     </div>
   );
