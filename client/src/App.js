@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { loadFromLocal, saveToLocal } from './lib/localStorage';
 import AddForm from './pages/AddForm';
 import AnimalSearch from './pages/AnimalSearch';
+import Contact from './pages/Contact';
 import Favorites from './pages/Favorites';
 import Home from './pages/Home';
 import Main from './pages/Main';
@@ -12,10 +13,26 @@ function App() {
   const [animals, setAnimals] = useState([]);
   const [favorites, setFavorites] = useState(loadFromLocal('favorites') ?? []);
   const [filteredResults, setFilteredResults] = useState([]);
+  const [selectedAnimalToContact, setSelectedAnimalToContact] = useState(
+    loadFromLocal('animalToContact') ?? []
+  );
+  const [selectedOrganizationToContact, setSelectedOrganizationToContact] =
+    useState(loadFromLocal('organizationToContact') ?? []);
+
+  console.log('Tier', selectedAnimalToContact);
+  console.log('Orga', selectedOrganizationToContact);
 
   useEffect(() => {
     saveToLocal('favorites', favorites);
   }, [favorites]);
+
+  useEffect(() => {
+    saveToLocal('animalToContact', selectedAnimalToContact);
+  }, [selectedAnimalToContact]);
+
+  useEffect(() => {
+    saveToLocal('organizationToContact', selectedOrganizationToContact);
+  }, [selectedOrganizationToContact]);
 
   useEffect(() => {
     fetch('http://localhost:4000/organizations')
@@ -61,14 +78,6 @@ function App() {
     }
   }
 
-  function Contact() {
-    return (
-      <>
-        <h1>Get In Touch</h1>
-      </>
-    );
-  }
-
   function toggleFavoritesAndFilter(favoriteAnimal) {
     const animalFavorites = animals.map((animal) => {
       if (animal._id === favoriteAnimal._id) {
@@ -108,10 +117,17 @@ function App() {
             favorites={favorites}
             organizations={organizations}
             onToggleFavoritesAndFilter={toggleFavoritesAndFilter}
+            onSetSelectedAnimalToContact={setSelectedAnimalToContact}
+            onSetSelectedOrganizationToContact={
+              setSelectedOrganizationToContact
+            }
           />
         </Route>
         <Route path='/contact'>
-          <Contact />
+          <Contact
+            selectedAnimalToContact={selectedAnimalToContact}
+            selectedOrganizationToContact={selectedOrganizationToContact}
+          />
         </Route>
       </Switch>
     </div>
