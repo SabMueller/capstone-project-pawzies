@@ -11,6 +11,8 @@ export default function FavoriteAnimalCard({
   favorites,
   organizations,
   onToggleFavoritesAndFilter,
+  onSetSelectedAnimalToContact,
+  onSetSelectedOrganizationToContact,
 }) {
   return (
     <>
@@ -46,22 +48,29 @@ export default function FavoriteAnimalCard({
               {organizations
                 .filter((__, i) => i === index)
                 .map((organization) => (
-                  <OrganizationWrapper key={organization._id}>
-                    <OrganizationIcon
-                      src={organizationIcon}
-                      alt='organization Icon'
-                    />
-                    <h3>{organization.name}</h3>
-                  </OrganizationWrapper>
+                  <section key={organization._id}>
+                    <OrganizationWrapper>
+                      <OrganizationIcon
+                        src={organizationIcon}
+                        alt='organization Icon'
+                      />
+                      <h3>{organization.name}</h3>
+                    </OrganizationWrapper>
+                    <Link to='/contact'>
+                      <ContactButton
+                        type='button'
+                        onClick={() => {
+                          onSetSelectedAnimalToContact(favorite);
+                          onSetSelectedOrganizationToContact(organization);
+                        }}>
+                        GET IN TOUCH
+                        <img src={ArrowIcon} alt='contact icon' />
+                      </ContactButton>
+                    </Link>
+                  </section>
                 ))}
             </FavoriteInfo>
           </FavoriteCard>
-          <Link to='/contact'>
-            <ContactButton type='button'>
-              GET IN TOUCH
-              <img src={ArrowIcon} alt='contact icon' />
-            </ContactButton>
-          </Link>
         </FavoriteCardWrapper>
       ))}
     </>

@@ -6,6 +6,8 @@ export default function Favorites({
   favorites,
   organizations,
   onToggleFavoritesAndFilter,
+  onSetSelectedAnimalToContact,
+  onSetSelectedOrganizationToContact,
 }) {
   return (
     <FavoritesWrapper>
@@ -14,6 +16,8 @@ export default function Favorites({
         favorites={favorites}
         organizations={organizations}
         onToggleFavoritesAndFilter={onToggleFavoritesAndFilter}
+        onSetSelectedAnimalToContact={onSetSelectedAnimalToContact}
+        onSetSelectedOrganizationToContact={onSetSelectedOrganizationToContact}
       />
       <Navigation />
     </FavoritesWrapper>

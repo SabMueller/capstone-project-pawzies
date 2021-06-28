@@ -18,7 +18,7 @@ function postOrganization(req, res) {
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
-    street: req.body.address,
+    street: req.body.street,
     zip: req.body.zip,
     city: req.body.city,
   });
