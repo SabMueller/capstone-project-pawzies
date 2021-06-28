@@ -19,9 +19,6 @@ function App() {
   const [selectedOrganizationToContact, setSelectedOrganizationToContact] =
     useState(loadFromLocal('organizationToContact') ?? []);
 
-  console.log('Tier', selectedAnimalToContact);
-  console.log('Orga', selectedOrganizationToContact);
-
   useEffect(() => {
     saveToLocal('favorites', favorites);
   }, [favorites]);

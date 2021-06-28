@@ -147,7 +147,6 @@ const AnimalName = styled.h2`
   color: var(--secondary);
   font-family: var(--ff-cursive);
   font-size: 2rem;
-
   padding: 0.5rem;
 `;
 
@@ -206,21 +205,22 @@ const SmallAnimalsIcon = styled.img`
 `;
 
 const OrganizationWrapper = styled.section`
-  background-color: var(--gray);
-  color: var(--black);
-  border-radius: 2rem;
-  filter: drop-shadow(0 0 0.2rem var(--black));
-  width: 90vw;
-  padding: 1rem;
-  margin: 2rem 0;
-  text-align: center;
   display: flex;
   flex-flow: column wrap;
   gap: 1rem;
 
+  background-color: var(--gray);
+  border-radius: 2rem;
+  color: var(--black);
+  filter: drop-shadow(0 0 0.2rem var(--black));
+  margin: 2rem 0;
+  padding: 1rem;
+  text-align: center;
+  width: 90vw;
+
   h2 {
-    font-size: 1.7rem;
     font-family: var(--ff-cursive);
+    font-size: 1.7rem;
     color: var(--primary-dark);
   }
 
