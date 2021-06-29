@@ -11,7 +11,7 @@ import searchIcon from '../assets/images/searchEmpty.svg';
 import searchActiveIcon from '../assets/images/searchFilled.svg';
 import cancelIcon from '../assets/images/cancel.svg';
 
-export default function Navigation() {
+export default function Navigation({ isStatic }) {
   const height = 4 * 60 + 80;
 
   const [{ y }, set] = useSpring(() => ({ y: height }));
@@ -49,7 +49,7 @@ export default function Navigation() {
   const display = y.to((py) => (py < height ? 'flex' : 'none'));
 
   return (
-    <NavWrapper>
+    <NavWrapper isStatic={isStatic}>
       <button className='action-btn' onClick={open}>
         <img src={logoIcon} alt='Logo Icon of Pawzies' />
       </button>
@@ -76,6 +76,11 @@ export default function Navigation() {
 
 const NavWrapper = styled.section`
   background-color: ivory;
+
+  position: ${(props) => (props.isStatic ? 'static' : 'fixed')};
+  bottom: ${(props) => (props.isStatic ? 'auto' : '0')};
+  margin: ${(props) => (props.isStatic ? 'auto' : '')};
+  width: ${(props) => (props.isStatic ? '414px' : '100vw')};
 
   .action-btn {
     display: flex;

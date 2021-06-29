@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import styled from 'styled-components/macro';
 import arrowDown from '../assets/images/arrowDown.svg';
 import cat from '../assets/images/cat.svg';
@@ -8,76 +8,83 @@ import favoriteIcon from '../assets/images/favoriteIcon.png';
 import organizationIcon from '../assets/images/organization.svg';
 import smallAnimals from '../assets/images/smallAnimals.svg';
 
-export default function AnimalCard({animals, organizations, onToggleFavoritesAndFilter}) {
+export default function AnimalCard({
+  animal,
+  organizations,
+  onToggleFavoritesAndFilter,
+  index,
+}) {
+  const [descriptionViewOpen, setDescriptionViewOpen] = useState([]);
 
-    const [descriptionViewOpen, setDescriptionViewOpen] = useState([]);
-
-    return (
-        <>
-        {animals.map((animal, index) => (
-            <AnimalCardRendered key={animal._id}>
-              <CardTop>
-                <AnimalProfile src={animal.picture} alt='profile of animal' />
-                <FavoriteIcon
-                  src={favoriteIcon}
-                  alt='favorite Icon'
-                  onClick={() => onToggleFavoritesAndFilter(animal)}
-                  style={animal.isFavorite ? {opacity: '100%',
-                  transition: 'all 0.4s ease-in',
-                  transform: 'scale(1.2)', } : {opacity: '40%', transition: 'all 0.5s ease.out'}}
-                />
-                <AnimalName>
-                  {animal.name.toUpperCase()}, {animal.age}
-                </AnimalName>
-                <Button
-                  type='button'
-                  onClick={() => {
-                    setDescriptionViewOpen([...descriptionViewOpen, animal._id]);
-                  }}>
-                  <img src={arrowDown} alt='Arrow Icon' />
-                </Button>
-              </CardTop>
-              <AnimalShortInfo>
-                <AnimalBreed>
-                  {animal.type === 'cat' ? (
-                    <CatIcon src={cat} alt='cat icon' />
-                  ) : null || animal.type === 'dog' ? (
-                    <DogIcon src={dog} alt='dog icon' />
-                  ) : null || animal.type === 'small_animals' ? (
-                    <SmallAnimalsIcon src={smallAnimals} alt='small Animals icon' />
-                  ) : null}
-                  <h3>{animal.breed}</h3>
-                </AnimalBreed>
-                <AnimalGender>
-                  <img src={circleIcon} alt='circle Icon' />
-                  <h3>{animal.gender}</h3>
-                </AnimalGender>
-                {organizations
-                  .filter((__, i) => i === index)
-                  .map((organization) => (
-                    <OrganizationName key={organization._id}>
-                      <img src={organizationIcon} alt='organization Icon' />
-                      <h3>{organization.name}</h3>
-                    </OrganizationName>
-                  ))}
-                <Traits>
-                  {animal.characteristics.map((trait, index) => (
-                    <span key={index + trait}>{trait} </span>
-                  ))}
-                </Traits>
-              </AnimalShortInfo>
-              {descriptionViewOpen.some((animalId) => animalId === animal._id) && (
-                <CardBottom>
-                  <h2>Bio</h2>
-                  <Description>{animal.description}</Description>
-                </CardBottom>
-              )}
-            </AnimalCardRendered>
-          ))}
-          </>
-    )
+  return (
+    <>
+      <AnimalCardRendered key={animal._id}>
+        <CardTop>
+          <AnimalProfile src={animal.picture} alt='profile of animal' />
+          <FavoriteIcon
+            src={favoriteIcon}
+            alt='favorite Icon'
+            onClick={() => onToggleFavoritesAndFilter(animal)}
+            style={
+              animal.isFavorite
+                ? {
+                    opacity: '100%',
+                    transition: 'all 0.4s ease-in',
+                    transform: 'scale(1.2)',
+                  }
+                : { opacity: '40%', transition: 'all 0.5s ease.out' }
+            }
+          />
+          <AnimalName>
+            {animal.name.toUpperCase()}, {animal.age}
+          </AnimalName>
+          <Button
+            type='button'
+            onClick={() => {
+              setDescriptionViewOpen([...descriptionViewOpen, animal._id]);
+            }}>
+            <img src={arrowDown} alt='Arrow Icon' />
+          </Button>
+        </CardTop>
+        <AnimalShortInfo>
+          <AnimalBreed>
+            {animal.type === 'cat' ? (
+              <CatIcon src={cat} alt='cat icon' />
+            ) : null || animal.type === 'dog' ? (
+              <DogIcon src={dog} alt='dog icon' />
+            ) : null || animal.type === 'small_animals' ? (
+              <SmallAnimalsIcon src={smallAnimals} alt='small Animals icon' />
+            ) : null}
+            <h3>{animal.breed}</h3>
+          </AnimalBreed>
+          <AnimalGender>
+            <img src={circleIcon} alt='circle Icon' />
+            <h3>{animal.gender}</h3>
+          </AnimalGender>
+          {organizations
+            .filter((__, i) => i === index)
+            .map((organization) => {
+              <OrganizationName key={organization._id}>
+                <img src={organizationIcon} alt='organization Icon' />
+                <h3>{organization.name}</h3>
+              </OrganizationName>;
+            })}
+          <Traits>
+            {animal.characteristics.map((trait, index) => (
+              <span key={index + trait}>{trait} </span>
+            ))}
+          </Traits>
+        </AnimalShortInfo>
+        {descriptionViewOpen.some((animalId) => animalId === animal._id) && (
+          <CardBottom>
+            <h2>Bio</h2>
+            <Description>{animal.description}</Description>
+          </CardBottom>
+        )}
+      </AnimalCardRendered>
+    </>
+  );
 }
-
 
 const AnimalCardRendered = styled.section`
   background-color: var(--white);
@@ -172,15 +179,6 @@ const AnimalGender = styled(AnimalBreed)`
   }
 `;
 
-const OrganizationName = styled(AnimalBreed)`
-    margin-top: 0.5rem;
-
-  img {
-    width: 1.7rem;
-  }
-`;
-
-
 const CatIcon = styled.img`
   width: 1.5rem;
 `;
@@ -221,5 +219,23 @@ const Traits = styled.div`
     border-radius: 100vw;
     color: var(--white);
     padding: 0.2rem 0.8rem;
+  }
+`;
+
+const OrganizationName = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  margin-top: 0.5rem;
+
+  h3 {
+    font-family: var(--ff-sans-serif);
+    font-size: 1.3rem;
+    font-weight: normal;
+  }
+
+  img {
+    width: 1.7rem;
   }
 `;

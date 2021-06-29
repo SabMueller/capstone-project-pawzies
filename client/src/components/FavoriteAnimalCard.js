@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
+import ArrowIcon from '../assets/images/arrowIcon.svg';
+import organizationIcon from '../assets/images/organization.svg';
 import cat from '../assets/images/cat.svg';
 import dog from '../assets/images/dog.svg';
 import favoriteIcon from '../assets/images/favoriteIcon.png';
-import organizationIcon from '../assets/images/organization.svg';
 import smallAnimals from '../assets/images/smallAnimals.svg';
-import ArrowIcon from '../assets/images/arrowIcon.svg';
 
 export default function FavoriteAnimalCard({
-  favorites,
+  favorite,
+  index,
   organizations,
   onToggleFavoritesAndFilter,
   onSetSelectedAnimalToContact,
@@ -16,63 +17,57 @@ export default function FavoriteAnimalCard({
 }) {
   return (
     <>
-      {favorites.map((favorite, index) => (
-        <FavoriteCardWrapper key={favorite._id}>
-          <FavoriteCard>
-            <FavoriteProfilePicture
-              src={favorite.picture}
-              alt='favorite profile'
-            />
-            <FavoriteName>{favorite.name.toUpperCase()}</FavoriteName>
-            <FavoriteIcon
-              src={favoriteIcon}
-              alt='favorite Icon'
-              onClick={() => onToggleFavoritesAndFilter(favorite)}
-            />
-            <FavoriteInfo>
-              <FavoriteInfoWrapper>
-                {favorite.type === 'cat' && (
-                  <CatIcon src={cat} alt='cat icon' />
-                )}{' '}
-                {favorite.type === 'dog' && (
-                  <DogIcon src={dog} alt='dog icon' />
-                )}
-                {favorite.type === 'small_animals' && (
-                  <SmallAnimalsIcon
-                    src={smallAnimals}
-                    alt='small Favorites icon'
-                  />
-                )}
-                <h3>{favorite.breed}</h3>
-              </FavoriteInfoWrapper>
-              {organizations
-                .filter((__, i) => i === index)
-                .map((organization) => (
-                  <section key={organization._id}>
-                    <OrganizationWrapper>
-                      <OrganizationIcon
-                        src={organizationIcon}
-                        alt='organization Icon'
-                      />
-                      <h3>{organization.name}</h3>
-                    </OrganizationWrapper>
-                    <Link to='/contact'>
-                      <ContactButton
-                        type='button'
-                        onClick={() => {
-                          onSetSelectedAnimalToContact(favorite);
-                          onSetSelectedOrganizationToContact(organization);
-                        }}>
-                        GET IN TOUCH
-                        <img src={ArrowIcon} alt='contact icon' />
-                      </ContactButton>
-                    </Link>
-                  </section>
-                ))}
-            </FavoriteInfo>
-          </FavoriteCard>
-        </FavoriteCardWrapper>
-      ))}
+      <FavoriteCardWrapper key={favorite._id}>
+        <FavoriteCard>
+          <FavoriteProfilePicture
+            src={favorite.picture}
+            alt='favorite profile'
+          />
+          <FavoriteName>{favorite.name.toUpperCase()}</FavoriteName>
+          <FavoriteIcon
+            src={favoriteIcon}
+            alt='favorite Icon'
+            onClick={() => onToggleFavoritesAndFilter(favorite)}
+          />
+          <FavoriteInfo>
+            <FavoriteInfoWrapper>
+              {favorite.type === 'cat' && <CatIcon src={cat} alt='cat icon' />}{' '}
+              {favorite.type === 'dog' && <DogIcon src={dog} alt='dog icon' />}
+              {favorite.type === 'small_animals' && (
+                <SmallAnimalsIcon
+                  src={smallAnimals}
+                  alt='small Favorites icon'
+                />
+              )}
+              <h3>{favorite.breed}</h3>
+            </FavoriteInfoWrapper>
+            {organizations
+              .filter((__, i) => i === index)
+              .map((organization) => (
+                <section key={organization._id}>
+                  <OrganizationWrapper>
+                    <OrganizationIcon
+                      src={organizationIcon}
+                      alt='organization Icon'
+                    />
+                    <h3>{organization.name}</h3>
+                  </OrganizationWrapper>
+                  <Link to='/contact'>
+                    <ContactButton
+                      type='button'
+                      onClick={() => {
+                        onSetSelectedAnimalToContact(favorite);
+                        onSetSelectedOrganizationToContact(organization);
+                      }}>
+                      GET IN TOUCH
+                      <img src={ArrowIcon} alt='contact icon' />
+                    </ContactButton>
+                  </Link>
+                </section>
+              ))}
+          </FavoriteInfo>
+        </FavoriteCard>
+      </FavoriteCardWrapper>
     </>
   );
 }
@@ -140,10 +135,6 @@ const FavoriteInfo = styled.div`
   }
 `;
 
-const OrganizationIcon = styled.img`
-  width: 1.7rem;
-`;
-
 const CatIcon = styled.img`
   width: 1.5rem;
 `;
@@ -159,6 +150,10 @@ const SmallAnimalsIcon = styled.img`
 const FavoriteInfoWrapper = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const OrganizationIcon = styled.img`
+  width: 1.7rem;
 `;
 
 const OrganizationWrapper = styled.div`

@@ -12,13 +12,20 @@ export default function Favorites({
   return (
     <FavoritesWrapper>
       <h1>Your Favorites</h1>
-      <FavoriteAnimalCard
-        favorites={favorites}
-        organizations={organizations}
-        onToggleFavoritesAndFilter={onToggleFavoritesAndFilter}
-        onSetSelectedAnimalToContact={onSetSelectedAnimalToContact}
-        onSetSelectedOrganizationToContact={onSetSelectedOrganizationToContact}
-      />
+      {favorites.map((favorite, index) => {
+        return (
+          <FavoriteAnimalCard
+            favorite={favorite}
+            index={index}
+            organizations={organizations}
+            onToggleFavoritesAndFilter={onToggleFavoritesAndFilter}
+            onSetSelectedAnimalToContact={onSetSelectedAnimalToContact}
+            onSetSelectedOrganizationToContact={
+              onSetSelectedOrganizationToContact
+            }
+          />
+        );
+      })}
       <Navigation />
     </FavoritesWrapper>
   );

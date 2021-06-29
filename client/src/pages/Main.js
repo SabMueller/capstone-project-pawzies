@@ -31,11 +31,16 @@ export default function Main({
           </Link>
         </ErrorWrapper>
       )}
-      <AnimalCard
-        organizations={organizations}
-        animals={animals}
-        onToggleFavoritesAndFilter={onToggleFavoritesAndFilter}
-      />
+      {animals.map((animal, index) => {
+        return (
+          <AnimalCard
+            organizations={organizations}
+            animal={animal}
+            index={index}
+            onToggleFavoritesAndFilter={onToggleFavoritesAndFilter}
+          />
+        );
+      })}
       <Navigation />
     </section>
   );

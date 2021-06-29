@@ -10,3 +10,7 @@ export function loadFromLocal(key) {
     console.error(error);
   }
 }
+
+export function removeFromLocal(key) {
+  localStorage.removeItem(key);
+}
