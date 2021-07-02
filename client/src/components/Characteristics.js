@@ -31,16 +31,17 @@ export default function Characteristics({
       </P>
       <Traits>
         <TraitCloud>
-          {traits.map((trait, index) => (
-            <span
-              style={{ color: 'var(--white)', fontSize: '1.2rem' }}
-              key={index + trait}>
-              {trait}
-              <Button type='button' onClick={() => onRemoveTrait(trait)}>
-                X
-              </Button>
-            </span>
-          ))}
+          {traits &&
+            traits.map((trait, index) => (
+              <span
+                style={{ color: 'var(--white)', fontSize: '1.2rem' }}
+                key={index + trait}>
+                {trait}
+                <Button type='button' onClick={() => onRemoveTrait(trait)}>
+                  X
+                </Button>
+              </span>
+            ))}
           <Input
             type='text'
             name='characteristics'

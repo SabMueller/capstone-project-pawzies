@@ -22,6 +22,6 @@ const [organizations, setOrganizations] = useState([
 <FavoriteAnimalCard
   organizations={organizations}
   favorite={favorite}
-  onClick={alert('success')}
+  onClick={console.log('success')}
 />;
 ```

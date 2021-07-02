@@ -41,7 +41,15 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:4000/animals')
       .then((result) => result.json())
-      .then((apiAnimals) => setAnimals(apiAnimals))
+      .then((apiAnimals) => {
+        const animals = apiAnimals.map((animal) => {
+          animal.isFavorite = favorites.some(
+            (favorite) => favorite._id === animal._id
+          );
+          return animal;
+        });
+        setAnimals(animals);
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -83,7 +91,9 @@ function App() {
       return animal;
     });
     setAnimals(animalFavorites);
-    const favoriteAnimals = animals.filter((animal) => animal.isFavorite);
+    const favoriteAnimals = animalFavorites.filter(
+      (animal) => animal.isFavorite
+    );
     setFavorites(favoriteAnimals);
   }
 

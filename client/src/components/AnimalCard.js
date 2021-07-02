@@ -63,12 +63,12 @@ export default function AnimalCard({
           </AnimalGender>
           {organizations
             .filter((__, i) => i === index)
-            .map((organization) => {
+            .map((organization) => (
               <OrganizationName key={organization._id}>
                 <img src={organizationIcon} alt='organization Icon' />
                 <h3>{organization.name}</h3>
-              </OrganizationName>;
-            })}
+              </OrganizationName>
+            ))}
           <Traits>
             {animal.characteristics.map((trait, index) => (
               <span key={index + trait}>{trait} </span>
@@ -100,8 +100,9 @@ const CardTop = styled.section`
 
 const AnimalProfile = styled.img`
   border-radius: 0.5rem;
-  max-width: 100vw;
+  width: 100vw;
   max-height: 31.25rem;
+  object-fit: cover;
 `;
 
 const FavoriteIcon = styled.img`
@@ -130,7 +131,7 @@ const Button = styled.button`
 
   position: absolute;
   top: 95%;
-  right: 10%;
+  right: 5%;
 
   background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
   border: 1px solid var(--secondary);
@@ -212,7 +213,8 @@ const Traits = styled.div`
   gap: 0.5rem;
   justify-content: space-evenly;
 
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
 
   span {
     background-color: var(--primary);

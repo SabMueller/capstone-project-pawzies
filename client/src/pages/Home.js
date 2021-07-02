@@ -1,14 +1,29 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
+import PawPrints from '../components/PawPrints';
 import Logo from '../assets/images/logo.svg';
 import ArrowIcon from '../assets/images/arrowIcon.svg';
 
 export default function Home() {
+  const [isClicked, setIsClicked] = useState(false);
+
+  console.log(isClicked);
+
   return (
     <LandingPageWrapper>
       <LogoWrapper>
-        <LogoImage src={Logo} alt='Logo of Pawzies' />
+        <LogoImage
+          src={Logo}
+          alt='Logo of Pawzies'
+          onClick={() => {
+            setIsClicked(true);
+            setTimeout(() => setIsClicked(false), 2000);
+          }}
+          isClicked={isClicked}
+        />
       </LogoWrapper>
+
       <TextWrapper>
         <Paragraph>
           Ready to adopt a <span> Friend For Life ?</span>
@@ -27,6 +42,7 @@ export default function Home() {
           </Button>
         </StyledLink>
       </TextWrapper>
+      <PawPrints />
     </LandingPageWrapper>
   );
 }
@@ -56,10 +72,21 @@ const LogoWrapper = styled.div`
   margin-top: 4rem;
   padding: 1.7rem;
   width: 12rem;
+  z-index: 100;
+`;
+
+const wiggle = keyframes`
+  0% {transform: rotate(-10deg);}
+  25% {transform: rotate(10deg);}
+  50% {transform: rotate(-10deg);}
+ 75% {transform: rotate(10deg);} 
+  100% {transform: rotate(0deg);}
 `;
 
 const LogoImage = styled.img`
   width: 10rem;
+  animation: ${wiggle} 3.7s;
+  z-index: 100;
 `;
 
 const TextWrapper = styled.section`
@@ -68,6 +95,7 @@ const TextWrapper = styled.section`
   flex-flow: column nowrap;
   gap: 1rem;
   color: var(--white);
+  z-index: 100;
 
   span {
     display: block;
@@ -91,6 +119,7 @@ const Button = styled.button`
   font-size: 1.3rem;
   padding: 0.5rem;
   width: 9rem;
+  z-index: 100;
 
   img {
     width: 1rem;
@@ -103,6 +132,7 @@ const PrimaryButton = styled(Button)`
   margin-bottom: 2.5rem;
   padding: 1rem;
   width: 10rem;
+  z-index: 100;
 
   img {
     width: 1.3rem;

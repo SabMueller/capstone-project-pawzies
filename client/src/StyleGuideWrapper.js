@@ -4,7 +4,13 @@ function StyleGuideWrapper({ children }) {
   return (
     <>
       <GlobalStyles />
-      {children}
+      <div
+        style={{
+          maxWidth: '375px',
+          border: '2px solid hotpink',
+        }}>
+        {children}
+      </div>
     </>
   );
 }

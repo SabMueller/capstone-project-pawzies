@@ -34,6 +34,7 @@ export default function Main({
       {animals.map((animal, index) => {
         return (
           <AnimalCard
+            key={animal._id}
             organizations={organizations}
             animal={animal}
             index={index}

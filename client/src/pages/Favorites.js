@@ -15,6 +15,7 @@ export default function Favorites({
       {favorites.map((favorite, index) => {
         return (
           <FavoriteAnimalCard
+            key={favorite._id}
             favorite={favorite}
             index={index}
             organizations={organizations}

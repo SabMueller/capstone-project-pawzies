@@ -39,7 +39,6 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
   const [isSuccessView, setIsSuccessView] = useState(false);
   const [isStandardView, setIsStandardView] = useState(true);
 
-
   const hiddenFileInput = useRef(null);
   const handleClick = (e) => {
     hiddenFileInput.current && hiddenFileInput.current.click();
@@ -64,9 +63,9 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
   function handleFormSubmit(event) {
     event.preventDefault();
     if (
-      validateOrganization(organization) &&
-      validateAnimalTrait(animal.characteristics) &&
-      validateAnimal(animal)
+      /*       validateOrganization(organization) && */
+      validateAnimalTrait(animal.characteristics) //&&
+      /*       validateAnimal(animal) */
     ) {
       onAddOrganizationsAndAnimals(organization, animal);
       setOrganization(initialOrganization);

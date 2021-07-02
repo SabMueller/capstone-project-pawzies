@@ -1,4 +1,4 @@
-<!-- ```jsx
+```jsx
 import { useState } from 'react';
 
 const [animal, setAnimal] = useState([]);

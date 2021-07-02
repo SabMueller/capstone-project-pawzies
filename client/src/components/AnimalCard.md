@@ -23,9 +23,12 @@ function onToggleFavoritesAndFilter() {
   console.log('toggledFavorite');
 }
 
-<AnimalCard
-  animal={animal}
-  organizations={organizations}
-  onClick={onToggleFavoritesAndFilter}
-/>;
+<div className='componentWrapper' style={{ width: '375px' }}>
+  <AnimalCard
+    animal={animal}
+    organizations={organizations}
+    onToggleFavoritesAndFilter={() => alert('geklickt')}
+  />
+  ;
+</div>;
 ```

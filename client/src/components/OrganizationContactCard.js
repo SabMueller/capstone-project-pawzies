@@ -1,4 +1,8 @@
 import styled from 'styled-components/macro';
+import mail from '../assets/images/mail.svg';
+import organization from '../assets/images/organization.svg';
+import pin from '../assets/images/pin.svg';
+import phone from '../assets/images/phone.svg';
 
 export default function OrganizationContactCard({
   selectedOrganizationToContact,
@@ -7,16 +11,26 @@ export default function OrganizationContactCard({
     <OrganizationWrapper>
       <h3>Organization Name</h3>
       <h2>{selectedOrganizationToContact.name.toUpperCase()}</h2>
-      <h3>Organization E-Mail</h3>
-      <span>{selectedOrganizationToContact.email}</span>
-      <h3>Organization Phone Number</h3>
-      <span>{selectedOrganizationToContact.phone}</span>
-      <h3>Organization Address</h3>
-      <AddressWrapper>
-        <span>{selectedOrganizationToContact.street}</span>
-        <span>{selectedOrganizationToContact.zip}</span>
-        <span>{selectedOrganizationToContact.city}</span>
-      </AddressWrapper>
+      <PartWrapper>
+        <Icon src={mail} alt='mail icon' />
+        <a href={`mailto:${selectedOrganizationToContact.email}`}>
+          {selectedOrganizationToContact.email}
+        </a>
+      </PartWrapper>
+      <PartWrapper>
+        <Icon src={phone} alt='phone icon' />
+        <a href={`tel:${selectedOrganizationToContact.phone}`}>
+          {selectedOrganizationToContact.phone}
+        </a>
+      </PartWrapper>
+      <PartWrapper>
+        <Icon src={pin} alt='map icon' />
+        <AddressWrapper>
+          <span>{selectedOrganizationToContact.street}</span>
+          <span>{selectedOrganizationToContact.zip}</span>
+          <span>{selectedOrganizationToContact.city}</span>
+        </AddressWrapper>
+      </PartWrapper>
     </OrganizationWrapper>
   );
 }
@@ -38,15 +52,32 @@ const OrganizationWrapper = styled.section`
   h2 {
     font-family: var(--ff-cursive);
     font-size: 1.7rem;
-    color: var(--primary-dark);
+    color: var(--primary);
   }
+`;
+
+const PartWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
 
   h3 {
     font-size: 1.3rem;
   }
+
+  a {
+    color: var(--secondary);
+  }
+`;
+
+const Icon = styled.img`
+  width: 2rem;
 `;
 
 const AddressWrapper = styled.div`
   display: flex;
   flex-flow: column wrap;
+  align-items: flex-start;
 `;

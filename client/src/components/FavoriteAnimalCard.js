@@ -17,7 +17,7 @@ export default function FavoriteAnimalCard({
 }) {
   return (
     <>
-      <FavoriteCardWrapper key={favorite._id}>
+      <FavoriteCardWrapper>
         <FavoriteCard>
           <FavoriteProfilePicture
             src={favorite.picture}
@@ -85,10 +85,9 @@ const FavoriteCard = styled.section`
   background-color: var(--white);
   border-radius: 2rem;
   filter: drop-shadow(0 0 0.2rem var(--black));
-  height: 10rem;
   letter-spacing: 0.1rem;
   margin: 2rem 0;
-  padding: 0 0.25rem;
+  padding: 0.5rem 0.1rem;
 `;
 
 const FavoriteProfilePicture = styled.img`

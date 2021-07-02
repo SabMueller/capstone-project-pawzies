@@ -1,8 +1,9 @@
 import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
 import AnimalContactCard from '../components/AnimalContactCard';
 import PawziesContactCard from '../components/PawziesContactCard';
-import Navigation from '../components/Navigation';
 import OrganizationContactCard from '../components/OrganizationContactCard';
+import ArrowIcon from '../assets/images/arrowIcon.svg';
 
 export default function Contact({
   selectedAnimalToContact,
@@ -19,7 +20,12 @@ export default function Contact({
       <OrganizationContactCard
         selectedOrganizationToContact={selectedOrganizationToContact}
       />
-      <Navigation />
+      <Link to='/main'>
+        <Button type='button'>
+          <Icon isLeft src={ArrowIcon} alt='arrow pointing left' />
+          GO BACK
+        </Button>
+      </Link>
     </ContactWrapper>
   );
 }
@@ -37,4 +43,23 @@ const ContactWrapper = styled.section`
   h3 {
     text-align: center;
   }
+`;
+
+const Button = styled.button`
+  display: flex;
+  justify-content: space-evenly;
+
+  background-color: var(--gray);
+  border-radius: 100vw;
+  cursor: pointer;
+  filter: drop-shadow(0 0 0.1rem var(--black));
+  font-family: var(--ff-cursive);
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  width: 9rem;
+`;
+
+const Icon = styled.img`
+  transform: scaleX(-1);
+  width: 0.8rem;
 `;

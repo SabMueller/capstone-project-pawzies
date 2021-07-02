@@ -1,17 +1,19 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom/';
 import styled from 'styled-components/macro';
 import { useSpring, animated, config } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import logoIcon from '../assets/images/logoIcon.svg';
-import homeIcon from '../assets/images/homeEmpty.svg';
-import homeActiveIcon from '../assets/images/homeFilled.svg';
-import favoritesIcon from '../assets/images/favoritesEmpty.svg';
-import favoritesActiveIcon from '../assets/images/favoritesFilled.svg';
-import searchIcon from '../assets/images/searchEmpty.svg';
-import searchActiveIcon from '../assets/images/searchFilled.svg';
+import homeIcon from '../assets/images/homeGray.svg';
+import homeActiveIcon from '../assets/images/homePrimary.svg';
+import favoritesIcon from '../assets/images/favoriteGray.svg';
+import favoritesActiveIcon from '../assets/images/favoritesPrimary.svg';
+import searchIcon from '../assets/images/searchGray.svg';
 import cancelIcon from '../assets/images/cancel.svg';
 
 export default function Navigation({ isStatic }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   const height = 4 * 60 + 80;
 
   const [{ y }, set] = useSpring(() => ({ y: height }));
@@ -50,9 +52,12 @@ export default function Navigation({ isStatic }) {
 
   return (
     <NavWrapper isStatic={isStatic}>
-      <button className='action-btn' onClick={open}>
+      <NavButton
+        isOpen={isOpen}
+        onClick={open}
+        onMouseDown={() => setIsOpen(true)}>
         <img src={logoIcon} alt='Logo Icon of Pawzies' />
-      </button>
+      </NavButton>
       <animated.div
         className='sheet'
         {...bind()}
@@ -66,7 +71,11 @@ export default function Navigation({ isStatic }) {
         <StyledNavLink className='link' to='/search'>
           <SearchIconStyled title='Search' role='img' />
         </StyledNavLink>
-        <div onClick={() => close()}>
+        <div
+          onClick={() => {
+            close();
+            setIsOpen(false);
+          }}>
           <Icon src={cancelIcon} alt='Cancel Icon' />
         </div>
       </animated.div>
@@ -82,34 +91,12 @@ const NavWrapper = styled.section`
   margin: ${(props) => (props.isStatic ? 'auto' : '')};
   width: ${(props) => (props.isStatic ? '414px' : '100vw')};
 
-  .action-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: var(--white);
-    border: 1px solid var(--gray);
-    border-radius: 50%;
-    bottom: -4%;
-    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-      0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0);
-    filter: drop-shadow(0 0 0.1rem black);
-    height: 4rem;
-    left: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    width: 4rem;
-    z-index: 100;
-  }
-
   .sheet {
-    background: var(--gray-dark);
-    border-radius: 12px 12px 0px;
-    height: calc(13vh + 10px);
-    left: 2vw;
+    background: rgba(38, 51, 90, 93%);
+    height: 4.25rem;
     position: fixed;
     touch-action: none;
-    width: 96vw;
+    width: 100vw;
     z-index: 100;
   }
 
@@ -126,6 +113,27 @@ const NavWrapper = styled.section`
   }
 `;
 
+const NavButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 50%;
+  bottom: -4%;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0);
+  filter: drop-shadow(0 0 0.1rem black);
+  height: 4rem;
+  left: 50%;
+  position: fixed;
+  opacity: ${(props) => (props.isOpen ? '0' : '100%')};
+  transform: translate(-50%, -50%);
+  width: 4rem;
+  z-index: 100;
+`;
+
 const StyledNavLink = styled(NavLink)`
   display: flex;
   align-items: center;
@@ -138,28 +146,29 @@ const StyledNavLink = styled(NavLink)`
 const HomeIconStyled = styled.div`
   background: center / contain no-repeat url(${homeIcon});
   width: 3.75rem;
+  opacity: 25%;
 
   .active & {
     background-image: url(${homeActiveIcon});
+    opacity: 100%;
   }
 `;
 
 const FavoritesIconStyled = styled.div`
   background: center / contain no-repeat url(${favoritesIcon});
   width: 3.75rem;
+  opacity: 25%;
 
   .active & {
     background-image: url(${favoritesActiveIcon});
+    opacity: 100%;
   }
 `;
 
 const SearchIconStyled = styled.div`
   background: center / contain no-repeat url(${searchIcon});
   width: 3.75rem;
-
-  .active & {
-    background-image: url(${searchActiveIcon});
-  }
+  opacity: 25%;
 `;
 
 const Icon = styled.img`
