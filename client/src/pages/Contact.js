@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import AnimalContactCard from '../components/AnimalContactCard';
 import PawziesContactCard from '../components/PawziesContactCard';
 import OrganizationContactCard from '../components/OrganizationContactCard';
@@ -20,7 +21,7 @@ export default function Contact({
       <OrganizationContactCard
         selectedOrganizationToContact={selectedOrganizationToContact}
       />
-      <Link to='/main'>
+      <Link to='/main' style={{ textDecoration: 'none' }}>
         <Button type='button'>
           <Icon isLeft src={ArrowIcon} alt='arrow pointing left' />
           GO BACK
@@ -29,6 +30,11 @@ export default function Contact({
     </ContactWrapper>
   );
 }
+
+Contact.propTypes = {
+  selectedAnimalToContact: PropTypes.object,
+  selectedOrganizationToContact: PropTypes.object,
+};
 
 const ContactWrapper = styled.section`
   display: grid;

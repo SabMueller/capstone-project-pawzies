@@ -14,10 +14,10 @@ function App() {
   const [favorites, setFavorites] = useState(loadFromLocal('favorites') ?? []);
   const [filteredResults, setFilteredResults] = useState([]);
   const [selectedAnimalToContact, setSelectedAnimalToContact] = useState(
-    loadFromLocal('animalToContact') ?? []
+    loadFromLocal('animalToContact') ?? {}
   );
   const [selectedOrganizationToContact, setSelectedOrganizationToContact] =
-    useState(loadFromLocal('organizationToContact') ?? []);
+    useState(loadFromLocal('organizationToContact') ?? {});
 
   useEffect(() => {
     saveToLocal('favorites', favorites);

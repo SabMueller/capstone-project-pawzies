@@ -8,8 +8,6 @@ import ArrowIcon from '../assets/images/arrowIcon.svg';
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false);
 
-  console.log(isClicked);
-
   return (
     <LandingPageWrapper>
       <LogoWrapper>

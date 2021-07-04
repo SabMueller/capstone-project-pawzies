@@ -84,10 +84,12 @@ const PawsWrapper = styled.section`
     background-color: var(--blue-dark);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     position: absolute;
+    z-index: 0;
   }
   .large {
     width: 3rem;
     height: 3rem;
+    z-index: 0;
   }
   .small-1 {
     left: -1.4rem;
@@ -171,4 +173,3 @@ const PawsWrapper = styled.section`
     animation: ${walk} 8s linear infinite 7s;
   }
 `;
-/* walking effect animation keyframes */

@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import mail from '../assets/images/mail.svg';
-import organization from '../assets/images/organization.svg';
 import pin from '../assets/images/pin.svg';
 import phone from '../assets/images/phone.svg';
 
@@ -35,6 +35,10 @@ export default function OrganizationContactCard({
   );
 }
 
+OrganizationContactCard.propTypes = {
+  selectedOrganizationToContact: PropTypes.object,
+};
+
 const OrganizationWrapper = styled.section`
   display: flex;
   flex-flow: column wrap;
@@ -50,18 +54,24 @@ const OrganizationWrapper = styled.section`
   width: 90vw;
 
   h2 {
+    color: var(--primary);
     font-family: var(--ff-cursive);
     font-size: 1.7rem;
-    color: var(--primary);
+  }
+
+  @media (min-width: 376px) {
+    letter-spacing: 0.1rem;
+    padding-left: 2rem;
+    width: 80vw;
   }
 `;
 
 const PartWrapper = styled.div`
   display: flex;
-  gap: 1rem;
-  flex-flow: row wrap;
-  justify-content: flex-start;
   align-items: center;
+  flex-flow: row wrap;
+  gap: 1rem;
+  justify-content: flex-start;
 
   h3 {
     font-size: 1.3rem;
@@ -78,6 +88,6 @@ const Icon = styled.img`
 
 const AddressWrapper = styled.div`
   display: flex;
-  flex-flow: column wrap;
   align-items: flex-start;
+  flex-flow: column wrap;
 `;

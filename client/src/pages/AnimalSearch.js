@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
+import styled, { keyframes } from 'styled-components/macro';
 import ArrowIcon from '../assets/images/arrowIcon.svg';
 import Logo from '../assets/images/logo.svg';
 
@@ -117,12 +118,34 @@ export default function AnimalSearch({ animals, onSetFilteredResults }) {
   );
 }
 
+AnimalSearch.propTypes = {
+  animals: PropTypes.array,
+  onSetFilteredResults: PropTypes.func,
+};
+
+const slideUpReturn = keyframes`
+  0% {
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
+  100% {
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+  }
+`;
+
 const SearchFormWrapper = styled.section`
   display: grid;
   place-items: center;
 `;
 
 const LogoWrapper = styled.div`
+  animation: ${slideUpReturn} 1s ease-in;
   background: var(--gray);
   border-bottom-left-radius: 20%;
   border-bottom-right-radius: 20%;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 
 export default function Characteristics({
   traits,
@@ -55,6 +56,12 @@ export default function Characteristics({
     </TraitWrapper>
   );
 }
+
+Characteristics.propTypes = {
+  traits: PropTypes.array,
+  onRemoveTrait: PropTypes.func,
+  onUpdateTraits: PropTypes.func,
+};
 
 const TraitWrapper = styled.section`
   display: flex;

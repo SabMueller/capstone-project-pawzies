@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import cat from '../assets/images/cat.svg';
 import circleIcon from '../assets/images/circleIcon.svg';
 import dog from '../assets/images/dog.svg';
@@ -40,6 +41,10 @@ export default function AnimalContactCard({ selectedAnimalToContact }) {
   );
 }
 
+AnimalContactCard.propTypes = {
+  selectedAnimalToContact: PropTypes.object,
+};
+
 const AnimalCardWrapper = styled.section`
   display: grid;
   place-items: center;
@@ -60,6 +65,10 @@ const AnimalCard = styled.section`
   margin: 1rem 0;
   padding: 0.5rem 0;
   width: 90vw;
+
+  @media (min-width: 376px) {
+    width: 80vw;
+  }
 `;
 
 const AnimalProfilePicture = styled.img`

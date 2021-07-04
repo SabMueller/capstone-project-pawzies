@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
+import styled, { keyframes, css } from 'styled-components/macro';
 import arrowDown from '../assets/images/arrowDown.svg';
 import cat from '../assets/images/cat.svg';
 import circleIcon from '../assets/images/circleIcon.svg';
@@ -22,18 +23,10 @@ export default function AnimalCard({
         <CardTop>
           <AnimalProfile src={animal.picture} alt='profile of animal' />
           <FavoriteIcon
+            isFavorite={animal.isFavorite}
             src={favoriteIcon}
             alt='favorite Icon'
             onClick={() => onToggleFavoritesAndFilter(animal)}
-            style={
-              animal.isFavorite
-                ? {
-                    opacity: '100%',
-                    transition: 'all 0.4s ease-in',
-                    transform: 'scale(1.2)',
-                  }
-                : { opacity: '40%', transition: 'all 0.5s ease.out' }
-            }
           />
           <AnimalName>
             {animal.name.toUpperCase()}, {animal.age}
@@ -86,12 +79,64 @@ export default function AnimalCard({
   );
 }
 
+AnimalCard.propTypes = {
+  organizations: PropTypes.array,
+  animal: PropTypes.object,
+  onToggleFavoritesAndFilter: PropTypes.func,
+  index: PropTypes.number,
+};
+
+const swap = keyframes`
+  0% {
+    opacity: 0;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scale(0, 0) translate(-700px, 0px);
+    transform: scale(0, 0) translate(-700px, 0px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    -webkit-transform: scale(1, 1) translate(0px, 0px);
+    transform: scale(1, 1) translate(0px, 0px);
+  }
+
+`;
+
+const beatingHeart = keyframes`
+  0% {
+    transform: scale(0.8);
+  }
+  5% {
+    transform: scale(0.9);
+  }
+  10% {
+    transform: scale(0.8);
+  }
+  15% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+`;
+
 const AnimalCardRendered = styled.section`
   background-color: var(--white);
   border-radius: 2rem;
   filter: drop-shadow(0 0 0.2rem var(--black));
   letter-spacing: 0.1rem;
   margin-bottom: 1rem;
+
+  @media (min-width: 376px) {
+    margin: 0 auto;
+    width: 50vw;
+  }
 `;
 
 const CardTop = styled.section`
@@ -110,7 +155,16 @@ const FavoriteIcon = styled.img`
   top: 0;
   right: 2%;
 
+  animation: ${(props) =>
+    props.isFavorite
+      ? css`
+          ${beatingHeart} 2s ease-in-out infinite;
+        `
+      : ''};
   cursor: pointer;
+  text-align: center;
+  text-align: center;
+  opacity: ${(props) => (props.isFavorite ? '100%' : '40%')};
   width: 4rem;
 `;
 
@@ -147,6 +201,9 @@ const Button = styled.button`
     padding: 0.2rem;
     width: 1.5rem;
   }
+
+  @media (min-width: 376px) {
+  }
 `;
 
 const AnimalShortInfo = styled.section`
@@ -156,6 +213,10 @@ const AnimalShortInfo = styled.section`
 
   span {
     display: block;
+  }
+
+  @media (min-width: 376px) {
+    padding: 2rem;
   }
 `;
 
@@ -201,10 +262,18 @@ const CardBottom = styled.section`
   h2 {
     margin-top: 0.2rem;
   }
+  @media (min-width: 376px) {
+    padding: 2rem;
+  }
 `;
 
 const Description = styled.p`
+  animation: ${swap} 0.8s ease-in;
   padding-bottom: 1rem;
+
+  @media (min-width: 376px) {
+    padding: 2rem;
+  }
 `;
 
 const Traits = styled.div`

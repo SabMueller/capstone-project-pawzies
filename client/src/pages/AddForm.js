@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 import AnimalForm from '../components/AnimalForm';
 import OrganizationForm from '../components/OrganizationForm';
@@ -65,7 +66,7 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
     if (
       /*       validateOrganization(organization) && */
       validateAnimalTrait(animal.characteristics) //&&
-      /*       validateAnimal(animal) */
+      /*       validateAnimal(animal)                */
     ) {
       onAddOrganizationsAndAnimals(organization, animal);
       setOrganization(initialOrganization);
@@ -188,6 +189,8 @@ export default function AddForm({ onAddOrganizationsAndAnimals }) {
     </>
   );
 }
+
+AddForm.propTypes = { onAddOrganizationsAndAnimals: PropTypes.func };
 
 const FormWrapper = styled.section`
   display: flex;

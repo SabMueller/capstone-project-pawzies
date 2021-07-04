@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import ArrowIcon from '../assets/images/arrowIcon.svg';
 import organizationIcon from '../assets/images/organization.svg';
 import cat from '../assets/images/cat.svg';
@@ -72,6 +73,30 @@ export default function FavoriteAnimalCard({
   );
 }
 
+FavoriteAnimalCard.propTypes = {
+  favorite: PropTypes.object,
+  index: PropTypes.number,
+  organizations: PropTypes.array,
+  onToggleFavoritesAndFilter: PropTypes.func,
+  onSetSelectedOrganizationToContact: PropTypes.func,
+  onSetSelectedAnimalToContact: PropTypes.func,
+};
+
+const tinLeftIn = keyframes`
+
+  0% {
+    opacity: 0.1;
+    transform-origin: 50% 0%;
+    transform: scale(0.2) translate(0%, -200%);
+  }
+
+  100% {
+    opacity: 1;
+    transform-origin: 50% 0%;
+    transform: scale(1) translate(0%, 0%);
+  }
+`;
+
 const FavoriteCardWrapper = styled.section`
   position: relative;
 `;
@@ -82,12 +107,18 @@ const FavoriteCard = styled.section`
   grid-template-rows: 1fr;
   place-items: center;
 
+  animation: ${tinLeftIn} 1.1s ease-in;
   background-color: var(--white);
   border-radius: 2rem;
   filter: drop-shadow(0 0 0.2rem var(--black));
   letter-spacing: 0.1rem;
   margin: 2rem 0;
   padding: 0.5rem 0.1rem;
+
+  @media (min-width: 376px) {
+    margin: 2rem auto;
+    width: 70vw;
+  }
 `;
 
 const FavoriteProfilePicture = styled.img`
@@ -107,6 +138,10 @@ const FavoriteIcon = styled.img`
 
   cursor: pointer;
   width: 2.5rem;
+
+  @media (min-width: 376px) {
+    width: 6rem;
+  }
 `;
 
 const FavoriteName = styled.h2`
@@ -118,6 +153,12 @@ const FavoriteName = styled.h2`
   grid-row: 1;
   margin-left: -20%;
   padding: 0.5rem;
+  z-index: 300;
+
+  @media (min-width: 376px) {
+    font-size: 2rem;
+    margin-left: 0.1rem;
+  }
 `;
 
 const FavoriteInfo = styled.div`
@@ -168,7 +209,6 @@ const ContactButton = styled.button`
 
   position: absolute;
   right: 5%;
-  bottom: -10%;
 
   background-color: var(--gray);
   border-radius: 100vw;
@@ -180,5 +220,9 @@ const ContactButton = styled.button`
 
   img {
     width: 0.7rem;
+  }
+
+  @media (min-width: 376px) {
+    bottom: 0;
   }
 `;

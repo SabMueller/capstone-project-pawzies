@@ -1,6 +1,8 @@
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import FavoriteAnimalCard from '../components/FavoriteAnimalCard';
 import Navigation from '../components/Navigation';
+import PawPrints from '../components/PawPrints';
 
 export default function Favorites({
   favorites,
@@ -27,10 +29,19 @@ export default function Favorites({
           />
         );
       })}
+      {favorites.length < 1 && <PawPrints />}
       <Navigation />
     </FavoritesWrapper>
   );
 }
+
+Favorites.propTypes = {
+  favorites: PropTypes.array,
+  organizations: PropTypes.array,
+  onToggleFavoritesAndFilter: PropTypes.func,
+  onSetSelectedAnimalToContact: PropTypes.func,
+  onSetSelectedOrganizationToContact: PropTypes.func,
+};
 
 const FavoritesWrapper = styled.section`
   margin-bottom: 3.5rem;

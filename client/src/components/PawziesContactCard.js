@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 
 export default function PawziesContactCard({
   selectedAnimalToContact,
@@ -24,6 +25,11 @@ export default function PawziesContactCard({
   );
 }
 
+PawziesContactCard.propTypes = {
+  selectedAnimalToContact: PropTypes.object,
+  selectedOrganizationToContact: PropTypes.object,
+};
+
 const TextWrapper = styled.section`
   display: grid;
   place-items: center;
@@ -46,5 +52,9 @@ const TextWrapper = styled.section`
       font-weight: bold;
       color: var(--white);
     }
+  }
+  @media (min-width: 376px) {
+    width: 80vw;
+    line-height: 2.3;
   }
 `;

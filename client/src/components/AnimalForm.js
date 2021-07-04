@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import Characteristics from '../components/Characteristics';
 import UploadIcon from '../assets/images/uploadIcon.svg';
 
@@ -125,6 +126,17 @@ export default function AnimalForm({
     </>
   );
 }
+
+AnimalForm.propTypes = {
+  animal: PropTypes.array,
+  onUpdateAnimal: PropTypes.func,
+  onRemoveTrait: PropTypes.func,
+  hiddenFileInput: PropTypes.func,
+  imageName: PropTypes.string,
+  onUpdateImage: PropTypes.func,
+  onHandleClick: PropTypes.func,
+  onUpdateTraits: PropTypes.func,
+};
 
 const Input = styled.input`
   align-self: center;

@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import AnimalCard from '../components/AnimalCard';
 import Navigation from '../components/Navigation';
 import ArrowIcon from '../assets/images/arrowIcon.svg';
@@ -47,9 +48,19 @@ export default function Main({
   );
 }
 
+Main.propTypes = {
+  organizations: PropTypes.array,
+  animals: PropTypes.array,
+  onToggleFavoritesAndFilter: PropTypes.func,
+};
+
 const ResultsText = styled.p`
   letter-spacing: 0.05rem;
   padding: 0.5rem;
+
+  @media (min-width: 376px) {
+    text-align: center;
+  }
 `;
 
 const ErrorWrapper = styled.section`

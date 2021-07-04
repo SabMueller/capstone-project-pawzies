@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 
 export default function OrganizationForm({
   organization,
@@ -64,6 +65,13 @@ export default function OrganizationForm({
     </>
   );
 }
+
+OrganizationForm.propTypes = {
+  organization: PropTypes.array,
+  onUpdateOrganization: PropTypes.func,
+  animal: PropTypes.array,
+  onUpdateAnimal: PropTypes.func,
+};
 
 const AddressWrapper = styled.section`
   display: flex;
