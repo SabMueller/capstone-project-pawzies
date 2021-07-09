@@ -32,14 +32,14 @@ function App() {
   }, [selectedOrganizationToContact]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/organizations')
+    fetch('/organizations')
       .then((result) => result.json())
       .then((apiOrganizations) => setOrganizations(apiOrganizations))
       .catch((error) => console.error(error));
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:4000/animals')
+    fetch('/animals')
       .then((result) => result.json())
       .then((apiAnimals) => {
         const animals = apiAnimals.map((animal) => {
@@ -51,6 +51,7 @@ function App() {
         setAnimals(animals);
       })
       .catch((error) => console.error(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function addOrganizationsAndAnimals(organization, animal) {

@@ -108,8 +108,8 @@ const NavWrapper = styled.section`
 
     height: 3.75rem;
     padding: 0 1rem;
-    text-transform: capitalize;
     text-decoration: none;
+    text-transform: capitalize;
   }
 `;
 
@@ -156,8 +156,8 @@ const HomeIconStyled = styled.div`
 
 const FavoritesIconStyled = styled.div`
   background: center / contain no-repeat url(${favoritesIcon});
-  width: 3.75rem;
   opacity: 25%;
+  width: 3.75rem;
 
   .active & {
     background-image: url(${favoritesActiveIcon});
